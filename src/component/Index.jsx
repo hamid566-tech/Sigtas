@@ -32,9 +32,9 @@ export default function Index() {
             {/* Government Seal Image */}
             <div className="flex justify-center">
               <img
-                src={islamic_logo}
+                src="https://api.builder.io/api/v1/image/assets/TEMP/e6aefdcb5dd50e75e6a8d1ba793732f5a6cc9e29?width=516"
                 alt="Afghanistan Government Seal"
-                className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 object-contain opacity-50"
+                className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 object-contain"
               />
             </div>
 
