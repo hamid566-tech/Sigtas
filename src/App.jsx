@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import './App.css'
 import Index from './component/Index'
 // import NotFound from './component/NotFound'
@@ -9,12 +9,12 @@ function App() {
 
   return (
     <>
-      <BrowserRouter basename='/Sigtas/'>
+      <HashRouter basename='/Sigtas/'>
         <Routes>
           <Route path="/" element={<Index />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   )
 }
