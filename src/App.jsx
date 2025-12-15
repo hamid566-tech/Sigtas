@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <HashRouter basename='/Sigtas/'>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="*" element={<NotFound />} />
