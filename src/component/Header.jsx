@@ -52,15 +52,15 @@ export function Header() {
                 </button>
                 <button
                   className="block w-full text-left px-4 py-2 hover:bg-gray-100 font-medium text-sm"
-                  onClick={() => handleLanguageChange("Dari")}
+                  onClick={() => handleLanguageChange("دری")}
                 >
-                  Dari
+                  دری
                 </button>
                 <button
                   className="block w-full text-left px-4 py-2 hover:bg-gray-100 font-medium text-sm"
-                  onClick={() => handleLanguageChange("Pashto")}
+                  onClick={() => handleLanguageChange("پشتو")}
                 >
-                  Pashto
+                  پشتو
                 </button>
               </div>
             )}
