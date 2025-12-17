@@ -2,10 +2,10 @@ import { Header } from "./Header";
 import islamic_logo from "../assets/islamic-logo.png";
 
 
-export default function Index() {
+export default function Home() {
   return (
     <div className="flex flex-col bg-white">
-      <Header />
+      {/* <Header /> */}
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center px-4 mt-15 py-6 sm:py-8 lg:py-12 ">

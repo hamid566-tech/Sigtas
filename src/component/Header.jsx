@@ -1,14 +1,26 @@
-import { Menu, User, ChevronDown } from "lucide-react";
+import { Menu, User, ChevronDown, Home } from "lucide-react";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function Header() {
   const [languageOpen, setLanguageOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("English"); // State for selected language
+  const navigate = useNavigate(); // Initialize useNavigate
+  const location = useLocation(); // Get the current location
 
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
     setLanguageOpen(false); // Close dropdown after selection
+  };
+
+  const handleMenuClick = () => {
+     if (location.pathname === '/menue') {
+      navigate('/'); // Navigate back to the home page
+    } else {
+      navigate('/menue'); // Navigate to TaxRegistrationList
+    }
+
   };
 
   return (
@@ -68,12 +80,20 @@ export function Header() {
           {/* Menu Icon */}
           <div>
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 sm:p-2 hover:bg-white/10 rounded transition-colors"
+              onClick={handleMenuClick}
+              className="flex items-center justify-center p-1.5 sm:p-2 hover:bg-white/10 rounded transition-colors"
               aria-label="Menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              <Menu className="w-6 h-6 sm:w-7 sm:h-7" />
+              >
+              <div className="flex items-center justify-center gap-1"> {/* Wrap icons and text in a flex container */}
+                {
+                  location.pathname === '/menue' ? (
+                    <Home className="w-6 h-6 sm:w-7 sm:h-7" />
+                  ) : (
+                    <Menu className="w-6 h-6 sm:w-7 sm:h-7" />
+                  )
+                }
+                <span className="text-center">{location.pathname === '/menue' ? 'Home' : 'Menu'}</span>
+              </div>
             </button>
           </div>
         </div>
