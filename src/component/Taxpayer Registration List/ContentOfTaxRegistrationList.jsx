@@ -23,7 +23,7 @@ function ContentOfTaxRegistrationList() {
 
                   <button className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
                     <div className="w-14 h-14 md:w-16 md:h-16 bg-gray-300 rounded-2xl">
-                        <img src="https://api.builder.io/api/v1/image/assets/TEMP/aac7438f9702a6b01feb69e9506c28cd758adb88?width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
+                        <img src="https://cdn.builder.io/api/v1/image/assets%2Ff68546ab0b8f44ae98779b8a4f64fa7d%2Ffabae43445fe4bf5a96da46f5d91a693?format=webp&width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
                     </div>
                     <p className="text-xs md:text-sm font-semibold text-black text-center">درخواست شخص انفرادی</p>
                   </button>
@@ -51,7 +51,7 @@ function ContentOfTaxRegistrationList() {
 
                   <button className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
                     <div className="w-14 h-14 md:w-16 md:h-16 bg-gray-300 rounded-2xl">
-                      <img src="https://api.builder.io/api/v1/image/assets/TEMP/db805bfee9df35e4f95ccf9dbc968451b202fbd4?width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
+                      <img src="https://cdn.builder.io/api/v1/image/assets%2Ff68546ab0b8f44ae98779b8a4f64fa7d%2F9ab7990b77b047658b8be7d7e828717b?format=webp&width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
                     </div>
                     <p className="text-xs md:text-sm font-semibold text-black text-center">پرنت نمبر تشخصیه انفرادی</p>
                   </button>
@@ -97,7 +97,7 @@ function ContentOfTaxRegistrationList() {
 
                   <button className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
                     <div className="w-14 h-14 md:w-16 md:h-16 bg-gray-300 rounded-2xl">
-                        <img src="https://api.builder.io/api/v1/image/assets/TEMP/2f3309f7702c6674f73c9a2fa7960f4beb4617d6?width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
+                        <img src="https://cdn.builder.io/api/v1/image/assets%2Ff68546ab0b8f44ae98779b8a4f64fa7d%2Fea5e9199f8434a80a1d807b17a3b2896?format=webp&width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
                     </div>
                     <p className="text-xs md:text-sm font-semibold text-black text-center">درخواست شخص حکمی</p>
                   </button>
@@ -125,7 +125,7 @@ function ContentOfTaxRegistrationList() {
 
                   <button className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
                     <div className="w-14 h-14 md:w-16 md:h-16 bg-gray-300 rounded-2xl">
-                        <img src="https://api.builder.io/api/v1/image/assets/TEMP/799f30f1067341b5dd5c08d21a0f0d23d8c799bd?width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
+                        <img src="https://cdn.builder.io/api/v1/image/assets%2Ff68546ab0b8f44ae98779b8a4f64fa7d%2F0634050d5b5c4e93bb8705e6de6c951f?format=webp&width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
                     </div>
                     <p className="text-xs md:text-sm font-semibold text-black text-center">پرنت نمبر تشخصیه حکمی</p>
                   </button>
@@ -158,7 +158,7 @@ function ContentOfTaxRegistrationList() {
 
                   <button className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
                     <div className="w-14 h-14 md:w-16 md:h-16 bg-gray-300 rounded-2xl">
-                        <img src="https://api.builder.io/api/v1/image/assets/TEMP/28c93d02bf0a7c6456a5af7eed085c85ad55da2b?width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
+                        <img src="https://cdn.builder.io/api/v1/image/assets%2Ff68546ab0b8f44ae98779b8a4f64fa7d%2Ff12d0e187c6445e2849f340c381fa583?format=webp&width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
                     </div>
                     <p className="text-xs md:text-sm font-semibold text-black text-center">تحقیق در مورد حساب مالیاتی</p>
                   </button>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Header } from '../Header';
 import ContentOfTaxRegistrationList from './ContentOfTaxRegistrationList';
 import MainMunue from './MainMunue';
+import Assessment from '../Assessment/Assessment';
 
 function TaxRegistrationList() {
 
@@ -18,16 +19,13 @@ function TaxRegistrationList() {
             <MainMunue setActiveSection={setActiveSection}/>
             
                 {
-                    activeSection==='btn2' &&(
-                        <div>
-                            <h2>no one here</h2>
-                        </div>
-                    )
-                }
-
-                {
                     activeSection==='btn1' &&(
                         <ContentOfTaxRegistrationList/>
+                    )
+                }
+                {
+                    activeSection==='btn2' &&(
+                        <Assessment/>
                     )
                 }
             
