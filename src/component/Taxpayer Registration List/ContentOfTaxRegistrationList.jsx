@@ -4,7 +4,7 @@ function ContentOfTaxRegistrationList() {
   return (
     
                     // {/* Main Content Area */}
-          <div className="flex-1 space-y-6 md:space-y-8 px-20 py-10 h-150 overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir='ltr'>
+          <div className="flex-1 space-y-6 md:space-y-8 px-10 py-10 h-150 overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir='ltr'>
                 
             {/* Section 1: Individual Registration */}
             <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6 "  dir="rtl">

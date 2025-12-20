@@ -13,8 +13,8 @@ function TaxRegistrationList() {
       {/* <Header/> */}
 
       {/* Main Content */}
-    <div className="container mx-auto px-4 mt-15 md:px-8 lg:px-12 py-6 md:py-8">
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8" dir='rtl'>
+    <div className="flex-1 flex items-center justify-center mx-auto px-10 mt-15 py-6 sm:py-8 lg:py-8">
+        <div className="flex flex-col w-full lg:flex-row gap-6 lg:gap-10" dir='rtl'>
 
             <MainMunue setActiveSection={setActiveSection}/>
             
