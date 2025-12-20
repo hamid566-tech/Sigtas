@@ -4,7 +4,7 @@ function ContentOfTaxRegistrationList() {
   return (
     
                     // {/* Main Content Area */}
-          <div className="flex-1 space-y-6 md:space-y-8">
+          <div className="flex-1 space-y-6 md:space-y-8 px-20 py-10 h-150 overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir='ltr'>
                 
             {/* Section 1: Individual Registration */}
             <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6 "  dir="rtl">
@@ -156,12 +156,7 @@ function ContentOfTaxRegistrationList() {
                     <p className="text-xs md:text-sm font-semibold text-black text-center">حفظ حساب مالیاتی</p>
                   </button>
 
-                  <button className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
-                    <div className="w-14 h-14 md:w-16 md:h-16 bg-gray-300 rounded-2xl">
-                        <img src="https://cdn.builder.io/api/v1/image/assets%2Ff68546ab0b8f44ae98779b8a4f64fa7d%2Ff12d0e187c6445e2849f340c381fa583?format=webp&width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
-                    </div>
-                    <p className="text-xs md:text-sm font-semibold text-black text-center">تحقیق در مورد حساب مالیاتی</p>
-                  </button>
+                 
 
                   <button className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
                     <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
@@ -176,17 +171,31 @@ function ContentOfTaxRegistrationList() {
                     </div>
                     <p className="text-xs md:text-sm font-semibold text-black text-center">انتقال معاملات</p>
                   </button>
-
-                  
-
-                  
-
-                  
                 </div>
               </div>
             </section>
+
+            {/* Section 4: Office Report */}
+            <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6" dir='rtl'>
+              <h2 className="text-center text-base md:text-lg font-semibold text-black mb-6">
+                راپور های اداری
+              </h2>
+              <div className="border border-gray-500 p-4 md:p-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+                  
+                   <button className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
+                    <div className="w-14 h-14 md:w-16 md:h-16 bg-gray-300 rounded-2xl">
+                        <img src="https://cdn.builder.io/api/v1/image/assets%2Ff68546ab0b8f44ae98779b8a4f64fa7d%2Ff12d0e187c6445e2849f340c381fa583?format=webp&width=118" alt="" className="w-full h-full rounded-2xl object-cover" />
+                    </div>
+                    <p className="text-xs md:text-sm font-semibold text-black text-center">تحقیق در مورد حساب مالیاتی</p>
+                  </button>
+
+                </div>
+              </div>
+            </section>
+
           </div>
-  )
+  )     
 }
 
 export default ContentOfTaxRegistrationList

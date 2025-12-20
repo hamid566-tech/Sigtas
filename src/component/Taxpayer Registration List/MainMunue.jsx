@@ -9,7 +9,7 @@ function MainMunue({ setActiveSection }) {
   };
 
   return (
-    <div className="w-full lg:w-80 xl:w-96">
+    <div className="w-full lg:w-80 xl:w-96 py-10 px-10  h-150 overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir='ltr'>
       <div className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6">
         <div className="space-y-4 md:space-y-5">
           {/* Example Button */}
