@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-function MainMunue({ setActiveSection }) {
+function MainMunue({ setActiveSection,currentLanguage }) {
   const [activeButton, setActiveButton] = useState('btn1'); // State to track active button
 
   const handleButtonClick = (buttonId) => {
@@ -8,28 +9,32 @@ function MainMunue({ setActiveSection }) {
     setActiveSection(buttonId); // Call setActiveSection
   };
 
+  const textDirection = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'ltr' : 'rtl';
+
+  const {t} =useTranslation();
+
   return (
-    <div className="w-full lg:w-80 xl:w-96 py-10 px-10  h-150 overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir='ltr'>
-      <div className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6">
+    <div className="w-full lg:w-80 xl:w-96 py-8 px-10 mt-3 h-[83vh] overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir={textDirection}>
+      <div className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6"> 
         <div className="space-y-4 md:space-y-5">
           {/* Example Button */}
           {[
-            { id: 'btn1', label: 'فهرست ثبت نام مالیه دهنده گان' },
-            { id: 'btn2', label: 'ارزیابی' },
-            { id: 'btn3', label: 'پرداخت / پس پرداخت ها' },
-            { id: 'btn4', label: 'تنظیم انتقال ضرر مجدد' },
-            { id: 'btn5', label: 'سند / دوسیه' },
-            { id: 'btn6', label: 'نامه ها / یاد آوریها' },
-            { id: 'btn7', label: 'مالیه موضوعی' },
-            { id: 'btn8', label: 'بررسی' },
-            { id: 'btn9', label: 'اعتراضات' },
-            { id: 'btn10', label: 'تطبیق قانون' },
-            { id: 'btn11', label: 'بودجه مالیه' },
-            { id: 'btn12', label: 'راپور های اداری' },
-            { id: 'btn13', label: 'روابط / تسهیلات' },
-            { id: 'btn14', label: 'اداره' },
-            { id: 'btn15', label: 'سیستم' },
-            { id: 'btn16', label: 'خروچ' },
+            { id: 'btn1', label: t('b1') },
+            { id: 'btn2', label: t('b2') },
+            { id: 'btn3', label: t('b3') },
+            { id: 'btn4', label: t('b4') },
+            { id: 'btn5', label: t('b5') },
+            { id: 'btn6', label: t('b6') },
+            { id: 'btn7', label: t('b7') },
+            { id: 'btn8', label: t('b8') },
+            { id: 'btn9', label: t('b9') },
+            { id: 'btn10', label: t('b10') },
+            { id: 'btn11', label: t('b11') },
+            { id: 'btn12', label: t('b12') },
+            { id: 'btn13', label: t('b13') },
+            { id: 'btn14', label: t('b14') },
+            { id: 'btn15', label: t('b15') },
+            { id: 'btn16', label: t('b16') },
           ].map((button) => (
             <button
               key={button.id}
