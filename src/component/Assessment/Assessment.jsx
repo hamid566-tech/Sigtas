@@ -11,7 +11,7 @@ function Assessment({currentLanguage}) {
   return (
     
                     // {/* Main Content Area */}
-          <div className="flex-1 space-y-6 md:space-y-8 px-10 py-8 h-[83vh] mt-3 overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir={textDirection}>
+          <div className="width-full space-y-6 md:space-y-8 px-10 py-8 h-[83vh] mt-3 overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir={textDirection}>
                 
             {/* Section 1: Assessment Number */}
             <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6 "  dir={textDirection1}>

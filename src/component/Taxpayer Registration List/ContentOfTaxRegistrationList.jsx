@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
+import Ind_Search from './SubComponents/Ind_Search';
 
 function ContentOfTaxRegistrationList({currentLanguage}) {
 
@@ -7,21 +8,34 @@ function ContentOfTaxRegistrationList({currentLanguage}) {
      const textDirection1 = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'rtl' : 'ltr';
      const {t} =useTranslation(); 
 
+     const [showIndSearch, setShowIndSearch] = useState(false);
+
+const handleIndSearch_click=()=>{
+  setShowIndSearch(true);
+}
+
 
   return (
     
                     // {/* Main Content Area */}
-          <div className="flex-1 space-y-6 md:space-y-8 px-10 py-8 mt-3 h-[83vh] overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir={textDirection}>
+          <div className="w-full space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir={textDirection}>
                 
+            {
+              showIndSearch ? ( <Ind_Search/>) : (<>
+       
+
+
             {/* Section 1: Individual Registration */}
-            <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6 "  dir={textDirection1}>
+            <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6" dir={textDirection1}>
               <h2 className="text-center text-base md:text-lg font-semibold text-black mb-6">
                 {t('c_1')}
               </h2>
               <div className="border border-gray-500 p-4 md:p-6">
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
                   
-                  <button className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
+                  <button 
+                  onClick={handleIndSearch_click}
+                  className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]">
                     <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
                       <img src="https://api.builder.io/api/v1/image/assets/TEMP/aac7438f9702a6b01feb69e9506c28cd758adb88?width=118" alt="" className="w-full h-full object-cover" />
                     </div>
@@ -200,7 +214,7 @@ function ContentOfTaxRegistrationList({currentLanguage}) {
                 </div>
               </div>
             </section>
-
+    </>) }
           </div>
   )     
 }
