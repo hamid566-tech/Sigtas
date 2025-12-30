@@ -39,7 +39,7 @@ export function Header({ currentLanguage, onLanguageChange }) {
   }, [dropdownRef]);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-blue-500 text-white z-50" dir={textDirection}>
+    <header className="fixed top-0 left-0 w-full bg-blue-500 text-white z-10" dir={textDirection}>
       <div className="px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
         {/* Right Section - Language Dropdown */}
         <div className="flex items-center gap-3">
