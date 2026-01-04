@@ -1,52 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
 
-function MainMunue({ setActiveSection,currentLanguage }) {
-  const [activeButton, setActiveButton] = useState('btn1'); // State to track active button
+function MainMunue({ currentLanguage }) {
+  const location = useLocation();
+  const textDirection = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'rtl' : 'ltr';
+  const { t } = useTranslation();
 
+  // Load active button from localStorage or use the path-based default
+  const storedActiveButton = localStorage.getItem('activeButton');
+  const defaultActiveButton = location.pathname === '/menu/content' ? 'btn1' : 'btn2';
+  const [activeButton, setActiveButton] = useState(storedActiveButton || defaultActiveButton);
+
+  useEffect(() => {
+    // Determine which button is active based on the current path
+    if (location.pathname === '/') {
+      setActiveButton('btn1');
+    } else if (location.pathname === '/menu/content') {
+      setActiveButton('btn1');
+    } else if (location.pathname === '/menu/assessment') {
+      setActiveButton('btn2');
+    }
+
+    // Save the active button to localStorage if it's changed
+    localStorage.setItem('activeButton', activeButton);
+  }, [location.pathname]);
+
+  const isSubPath = location.pathname.startsWith('/menu/content/');
+
+  // Handle button click if not in a subpath
   const handleButtonClick = (buttonId) => {
-    setActiveButton(buttonId); // Set active button
-    setActiveSection(buttonId); // Call setActiveSection
+    if (!isSubPath) {
+      setActiveButton(buttonId);
+      localStorage.setItem('activeButton', buttonId);
+    }
   };
 
-  const textDirection = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'ltr' : 'rtl';
-
-  const {t} =useTranslation();
-
   return (
-    <div className="w-full lg:w-80 xl:w-96 py-8 px-10 mt-3 h-[83vh] overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir={textDirection}>
-      <div className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6"> 
+    <div className="w-full lg:w-80 xl:w-96 py-8 px-10 mt-3 h-[83vh] overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px rgba(0,43,255,0.32)]" dir={textDirection}>
+      <div className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px 5px rgba(0,43,255,0.32)] p-4 md:p-6">
         <div className="space-y-4 md:space-y-5">
-          {/* Example Button */}
           {[
-            { id: 'btn1', label: t('b1') },
-            { id: 'btn2', label: t('b2') },
-            { id: 'btn3', label: t('b3') },
-            { id: 'btn4', label: t('b4') },
-            { id: 'btn5', label: t('b5') },
-            { id: 'btn6', label: t('b6') },
-            { id: 'btn7', label: t('b7') },
-            { id: 'btn8', label: t('b8') },
-            { id: 'btn9', label: t('b9') },
-            { id: 'btn10', label: t('b10') },
-            { id: 'btn11', label: t('b11') },
-            { id: 'btn12', label: t('b12') },
-            { id: 'btn13', label: t('b13') },
-            { id: 'btn14', label: t('b14') },
-            { id: 'btn15', label: t('b15') },
-            { id: 'btn16', label: t('b16') },
+            { id: 'btn1', label: t('b1'), path: '/menu/content' },
+            { id: 'btn2', label: t('b2'), path: '/menu/assessment' },
           ].map((button) => (
-            <button
+            <Link
               key={button.id}
-              onClick={() => handleButtonClick(button.id)}
+              to={button.path}
               className={`w-full h-12 flex items-center justify-center rounded-md ${
-                activeButton === button.id
-                  ? 'border-4 border-gray-700/20 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] bg-white text-black font-semibold text-sm md:text-base hover:bg-gray-50'
-                  : 'bg-indigo-500 text-white font-semibold text-sm md:text-base hover:bg-indigo-600'
-              } transition-colors cursor-pointer`}
+                isSubPath 
+                  ? (activeButton === button.id 
+                      ? 'border-4 border-gray-700/20 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] bg-white text-black opacity-50 cursor-not-allowed'
+                      : 'bg-white text-black opacity-30 cursor-not-allowed') // Unselected button style
+                  : (activeButton === button.id 
+                      ? 'border-4 border-gray-700/20 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] bg-white text-black font-semibold text-sm md:text-base'
+                      : 'bg-indigo-500 text-white font-semibold text-sm md:text-base hover:bg-indigo-600')
+              } transition-colors`}
+              onClick={(e) => {
+                if (isSubPath) {
+                  e.preventDefault(); // Prevent the default action
+                  e.stopPropagation(); // Stop the event from bubbling
+                } else {
+                  handleButtonClick(button.id);
+                }
+              }}
             >
               {button.label}
-            </button>
+            </Link>
           ))}
         </div>
       </div>

@@ -61,5 +61,27 @@
   "c1_11":"Refund Payment",
   "c1_12":"Delete Assessment Number",
   "c1_13":"Administrative Reports",
-  "c1_14":"Print Taxpayer Payment Certificate"
+  "c1_14":"Print Taxpayer Payment Certificate",
+
+  "A1_1":"Search",
+  "A1_2":"Identity Number",
+  "A1_3":"Total",
+  "A1_4":"Name",
+  "A1_5":"Father Name",
+  "A1_6":"G/Father Name",
+  "A1_7":"Surname",
+  "A1_8":"Date of Birth",
+  "A1_9":"ID Number",
+  "A1_10":"Phone Number",
+  "A1_11":"Mobile Number",
+  "A1_12":"Registered Document Number",
+  "A1_13":"Quantity",
+  "A1_14":"Find",
+  "A1_15":"Exit",
+
+  
+  "Z1_1":"Do you want to exit the page?",
+  "Z1_2":"Yes",
+  "Z1_3":"No",
+  "Z1_4":"Cancel"
 }

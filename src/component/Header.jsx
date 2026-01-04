@@ -10,19 +10,26 @@ export function Header({ currentLanguage, onLanguageChange }) {
   const location = useLocation();
   const dropdownRef = useRef(null);
   
-    // Set text direction based on selected language
-    const textDirection = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'rtl' : 'ltr';
+  // Set text direction based on selected language
+  const textDirection = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'rtl' : 'ltr';
 
   const handleLanguageChange = (language) => {
-    // Change the language using i18next
-    onLanguageChange(language); 
-
-
+    onLanguageChange(language);
     setLanguageOpen(false); // Close the dropdown
   };
 
   const handleMenuClick = () => {
-    navigate(location.pathname === '/menue' ? '/' : '/menue');
+    // Check if on menu/content path
+    if (location.pathname.startsWith('/menu/content/')) {
+      return; // Do nothing if on /menu/content/*
+    }
+
+    // Navigate to the appropriate path
+    if (location.pathname.startsWith('/menu/')) {
+      navigate('/'); // Change to '/' or another appropriate path.
+    } else {
+      navigate('/menu/content'); // Redirect to the default content page
+    }
   };
 
   useEffect(() => {
@@ -38,6 +45,9 @@ export function Header({ currentLanguage, onLanguageChange }) {
     };
   }, [dropdownRef]);
 
+  // Determine if we are on the content page
+  const isOnContentPage = location.pathname.startsWith('/menu/content/');
+
   return (
     <header className="fixed top-0 left-0 w-full bg-blue-500 text-white z-10" dir={textDirection}>
       <div className="px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
@@ -45,14 +55,18 @@ export function Header({ currentLanguage, onLanguageChange }) {
         <div className="flex items-center gap-3">
           {/* Menu Icon */}
           <div>
-            <button onClick={handleMenuClick} className="flex items-center justify-center p-1.5 sm:p-2 hover:bg-white/10 rounded transition-colors" aria-label="Menu">
+            <button
+              onClick={handleMenuClick}
+              className={`flex items-center justify-center p-1.5 sm:p-2 rounded transition-colors ${isOnContentPage ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/10'}`}
+              aria-label="Menu"
+              disabled={isOnContentPage}>
               <div className="flex items-center justify-center gap-1">
-                {location.pathname === '/menue' ? (
+                {location.pathname.startsWith('/menu/') ? (
                   <Home className="w-6 h-6 sm:w-7 sm:h-7" />
                 ) : (
                   <Menu className="w-6 h-6 sm:w-7 sm:h-7" />
                 )}
-                <span className="text-center">{t(location.pathname === '/menue' ? 'Home' : 'Menu')}</span>
+                <span className="text-center">{t(location.pathname.startsWith('/menu/') ? 'Home' : 'Menu')}</span>
               </div>
             </button>
           </div>

@@ -29,7 +29,7 @@ function App() {
       <Header currentLanguage={language} onLanguageChange={handleLanguageChange} />
       <Routes>
         <Route path="/" element={<Home currentLanguage={language} />} />
-        <Route path='/menue' element={<TaxRegistrationList currentLanguage={language} />} />
+        <Route path='/menu/*' element={<TaxRegistrationList currentLanguage={language} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </HashRouter>
