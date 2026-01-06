@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 function MainMunue({ currentLanguage }) {
   const location = useLocation();
-  const textDirection = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'rtl' : 'ltr';
+  const textDirection = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'ltr' : 'rtl';
   const { t } = useTranslation();
 
   // Load active button from localStorage or use the path-based default
@@ -37,12 +37,26 @@ function MainMunue({ currentLanguage }) {
   };
 
   return (
-    <div className="w-full lg:w-80 xl:w-96 py-8 px-10 mt-3 h-[83vh] overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px rgba(0,43,255,0.32)]" dir={textDirection}>
-      <div className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px 5px rgba(0,43,255,0.32)] p-4 md:p-6">
+    <div className="w-full lg:w-80 xl:w-96 py-8 px-10 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 " dir={textDirection}>
+        
         <div className="space-y-4 md:space-y-5">
           {[
             { id: 'btn1', label: t('b1'), path: '/menu/content' },
             { id: 'btn2', label: t('b2'), path: '/menu/assessment' },
+            { id: 'btn3', label: t('b3'), path: '/menu/assessment' },
+            { id: 'btn4', label: t('b4'), path: '/menu/assessment' },
+            { id: 'btn5', label: t('b5'), path: '/menu/assessment' },
+            { id: 'btn6', label: t('b6'), path: '/menu/assessment' },
+            { id: 'btn7', label: t('b7'), path: '/menu/assessment' },
+            { id: 'btn8', label: t('b8'), path: '/menu/assessment' },
+            { id: 'btn9', label: t('b9'), path: '/menu/assessment' },
+            { id: 'btn10', label: t('b10'), path: '/menu/assessment' },
+            { id: 'btn11', label: t('b11'), path: '/menu/assessment' },
+            { id: 'btn12', label: t('b12'), path: '/menu/assessment' },
+            { id: 'btn13', label: t('b13'), path: '/menu/assessment' },
+            { id: 'btn14', label: t('b14'), path: '/menu/assessment' },
+            { id: 'btn15', label: t('b15'), path: '/menu/assessment' },
+            { id: 'btn16', label: t('b16'), path: '/menu/assessment' },
           ].map((button) => (
             <Link
               key={button.id}
@@ -69,7 +83,6 @@ function MainMunue({ currentLanguage }) {
             </Link>
           ))}
         </div>
-      </div>
     </div>
   );
 }

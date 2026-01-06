@@ -11,7 +11,7 @@ function ContentOfTaxRegistrationList({ currentLanguage }) {
   const { t } = useTranslation();
 
   return (
-    <div className="width-full sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)]" dir={textDirection}>
+    <div className="width-full sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 " dir={textDirection}>
       {/* <Cont_of_Tax textDirection1={textDirection1} t={t} /> */}
       <Routes>
         <Route path="/" element={<Cont_of_Tax textDirection1={textDirection1} t={t} />} />

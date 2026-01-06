@@ -5,10 +5,9 @@ import Modal from '../Dialog box/Modal';
 import { useNavigate } from 'react-router-dom';
 
 const Ind_Search = ({ textDirection1, t }) => {
+  
   const navigate = useNavigate();
-
   const inputRefs = useRef(Array(11).fill().map(() => React.createRef()));
-
   const [showDialog, setShowDialog] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
@@ -35,6 +34,8 @@ const Ind_Search = ({ textDirection1, t }) => {
     if (unsavedChanges && !showDialog) {
       event.preventDefault();  // Stop the default navigation
       setShowDialog(true);  // Show the modal
+    } else if (!unsavedChanges) {
+      navigate('/menu/content');
     }
   };
 
@@ -48,8 +49,20 @@ const Ind_Search = ({ textDirection1, t }) => {
 
     window.addEventListener('popstate', handlePopState);
 
+    // Before unload event to handle refresh or close
+    const handleBeforeUnload = (event) => {
+      if (unsavedChanges) {
+        const confirmationMessage = "You have unsaved changes. Do you really want to leave?";
+        event.returnValue = confirmationMessage; // Standard for most browsers
+        return confirmationMessage; // For older browsers
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
     return () => {
       window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, [unsavedChanges, showDialog]);
 
@@ -84,7 +97,7 @@ const Ind_Search = ({ textDirection1, t }) => {
 
   return (
     <>
-      <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6" dir="rtl">
+      <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-400/60 shadow-[0px_0_10px_1px_rgba(0,43,255,0.32)] p-4 md:p-6" dir="rtl">
         <h2 className="text-center text-base md:text-lg font-semibold text-black mb-6">{t('A1_1')}</h2>
 
         <div className="border border-gray-400 mr-4 flex flex-wrap flex-col md:flex-row justify-between items-center p-4 md:p-6 rounded-tl-[30px] rounded-tr-[30px]" dir={textDirection1}>
@@ -95,7 +108,7 @@ const Ind_Search = ({ textDirection1, t }) => {
           {renderInputFields().slice(2, 10)}
         </div>
 
-        <div className="border mt-4 mr-4 border-gray-400 flex flex-wrap justify-between items-center flex-col md:flex-row gap-10 p-4 md:p-6" dir={textDirection1}>
+        <div className="border rounded-br-[37px] rounded-bl-[37px] mt-4 mr-4 border-gray-400 flex flex-wrap justify-between items-center flex-col md:flex-row gap-10 p-4 md:p-6" dir={textDirection1}>
           <div className='flex flex-col md:flex-row items-start mb-4 md:mb-0 md:mr-4 gap-5'>
             <label className="font-medium text-[13px] text-black p-2 text-right sm:text-left min-w-[120px]">{t('A1_13')}:</label>
             <input

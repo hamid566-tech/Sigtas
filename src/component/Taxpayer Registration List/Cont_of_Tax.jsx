@@ -49,9 +49,11 @@ const Cont_of_Tax = ({ textDirection1, t }) => {
   ];
 
   const renderSection = (title, buttons) => (
-    <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-300/60 shadow-[3px_0_8.5px_5px_rgba(0,43,255,0.32)] p-4 md:p-6" dir={textDirection1}>
-      <h2 className="text-center text-base md:text-lg font-semibold text-black mb-6">{title}</h2>
-      <div className="border border-gray-500 p-4 md:p-6">
+    <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-400/60 shadow-[0px_0_10px_1px_rgba(0,43,255,0.32)] p-4 md:p-6" dir={textDirection1}>
+      <div className=" border border-cyan-500/60 rounded-[37px]  p-4 md:p-6 mb-3">
+      <h2 className="text-center text-base md:text-lg font-semibold text-black ">{title}</h2>
+      </div>
+      <div className=" border border-cyan-500/60 rounded-[37px]  p-4 md:p-6">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
           {buttons.map(({ src, label, path }, index) => (
             <TaxButton key={index} imageSrc={src} label={label} path={path} />
