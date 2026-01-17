@@ -1,23 +1,34 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Tin_Search from './SubComponents/tin_info_menue_1/Tin_Search';
 import Cont_of_Tax from './Cont_of_Tax';
+import Tin_Search from './SubComponents/tin_info_menue_1/menu_item_1/Tin_Search';
+import Request_Tin from './SubComponents/tin_info_menue_1/menu_item_2/Request_Tin';
 
 function ContentOfTaxRegistrationList({ currentLanguage }) {
    
+  const location = useLocation(); // Get the current location
   const textDirection = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'ltr' : 'rtl';
   const textDirection1 = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'rtl' : 'ltr';
   const { t } = useTranslation();
 
+   // Scroll to top on location change for specific paths
+  // useEffect(() => {
+  //   if (location.pathname.includes('/menu/content')) {
+  //     window.scrollTo(0, 0); 
+  //     console.log("Scrolled to top on:", location.pathname);
+  //   }
+  // }, [location]);
+
   return (
-    <div className="width-full sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 " dir={textDirection}>
+    < >
       {/* <Cont_of_Tax textDirection1={textDirection1} t={t} /> */}
       <Routes>
-        <Route path="/" element={<Cont_of_Tax textDirection1={textDirection1} t={t} />} />
-        <Route path="tin_search" element={<Tin_Search textDirection1={textDirection1} t={t} />} />
+        <Route path="/" element={<Cont_of_Tax textDirection={textDirection} textDirection1={textDirection1} t={t} />} />
+        <Route path="tin_search" element={<Tin_Search textDirection={textDirection} textDirection1={textDirection1} t={t} />} />
+        <Route path="request_tin/*" element={<Request_Tin textDirection={textDirection}  textDirection1={textDirection1} t={t} />} />
       </Routes>
-    </div>
+    </>
   );
 }
 

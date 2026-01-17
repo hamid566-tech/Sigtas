@@ -13,12 +13,12 @@ const TaxButton = ({ imageSrc, label, path }) => (
   </Link>
 );
 
-const Cont_of_Tax = ({ textDirection1, t }) => {
+const Cont_of_Tax = ({textDirection, textDirection1, t }) => {
   
 
   const taxButtonsSection1 = [
     { src: "https://api.builder.io/api/v1/image/assets/TEMP/aac7438f9702a6b01feb69e9506c28cd758adb88?width=118", label: t('c_2'), path: '/menu/content/tin_search'},
-    { src: "https://cdn.builder.io/api/v1/image/assets%2Ff68546ab0b8f44ae98779b8a4f64fa7d%2Ffabae43445fe4bf5a96da46f5d91a693?format=webp&width=118", label: t('c_3') },
+    { src: "https://cdn.builder.io/api/v1/image/assets%2Ff68546ab0b8f44ae98779b8a4f64fa7d%2Ffabae43445fe4bf5a96da46f5d91a693?format=webp&width=118", label: t('c_3'), path: '/menu/content/request_tin' },
     { src: "https://api.builder.io/api/v1/image/assets/TEMP/8d3463b164755664690afbe12b85eafe494ddd6f?width=118", label: t('c_4') },
     { src: "https://api.builder.io/api/v1/image/assets/TEMP/ff3b61622c582cb6a6d3a21b2bbe6a3abd9b7ac4?width=118", label: t('c_5') },
     { src: "https://api.builder.io/api/v1/image/assets/TEMP/db805bfee9df35e4f95ccf9dbc968451b202fbd4?width=118", label: t('c_6') },
@@ -64,12 +64,12 @@ const Cont_of_Tax = ({ textDirection1, t }) => {
   );
 
   return (
-    <>
+    <div className="width-full sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 "dir={textDirection}>
       {renderSection(t('c_1'), taxButtonsSection1)}
       {renderSection(t('c_11'), taxButtonsSection2)}
       {renderSection(t('c_19'), taxButtonsSection3)}
       {renderSection(t('c_23'), taxButtonsSection4)}
-    </>
+    </div>
   );
 };
 

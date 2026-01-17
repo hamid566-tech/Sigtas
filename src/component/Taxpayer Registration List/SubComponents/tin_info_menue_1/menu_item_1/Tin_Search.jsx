@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import down_icon from '../../../../assets/down_icon.png';
-import up_icon from '../../../../assets/up_icon.png';
-import Modal from '../Dialog box/Modal';
+import down_icon from '../../../../../assets/down_icon.png';
+import up_icon from '../../../../../assets/up_icon.png';
+import Modal from '../../Dialog box/Modal';
 import { useNavigate } from 'react-router-dom';
 
-const Ind_Search = ({ textDirection1, t }) => {
+const Ind_Search = ({textDirection, textDirection1, t }) => {
   
   const navigate = useNavigate();
   const inputRefs = useRef(Array(11).fill().map(() => React.createRef()));
@@ -96,19 +96,19 @@ const Ind_Search = ({ textDirection1, t }) => {
   );
 
   return (
-    <>
+    <div className="width-full sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 "dir={textDirection}>
       <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-400/60 shadow-[0px_0_10px_1px_rgba(0,43,255,0.32)] p-4 md:p-6" dir="rtl">
         <h2 className="text-center text-base md:text-lg font-semibold text-black mb-6">{t('A1_1')}</h2>
 
-        <div className="border border-gray-400 mr-4 flex flex-wrap flex-col md:flex-row justify-between items-center p-4 md:p-6 rounded-tl-[30px] rounded-tr-[30px]" dir={textDirection1}>
+        <div className="border border-gray-500 bg-[rgba(171,196,255,0.9)] mr-4 flex flex-wrap flex-col md:flex-row justify-between items-center p-4 md:p-6 rounded-tl-[30px] rounded-tr-[30px]" dir={textDirection1}>
           {renderInputFields().slice(0, 2)}
         </div>
 
-        <div className="border mt-4 mr-4 border-gray-400 flex flex-wrap flex-col md:flex-row justify-between items-center p-4 md:p-6" dir={textDirection1}>
+        <div className="border mt-4 mr-4 border-gray-400 bg-[#c2c2c2] flex flex-wrap flex-col md:flex-row justify-between items-center p-4 md:p-6" dir={textDirection1}>
           {renderInputFields().slice(2, 10)}
         </div>
 
-        <div className="border rounded-br-[37px] rounded-bl-[37px] mt-4 mr-4 border-gray-400 flex flex-wrap justify-between items-center flex-col md:flex-row gap-10 p-4 md:p-6" dir={textDirection1}>
+        <div className="border rounded-br-[37px] rounded-bl-[37px] bg-[#c2c2c2] mt-4 mr-4 border-gray-400 flex flex-wrap justify-between items-center flex-col md:flex-row gap-10 p-4 md:p-6" dir={textDirection1}>
           <div className='flex flex-col md:flex-row items-start mb-4 md:mb-0 md:mr-4 gap-5'>
             <label className="font-medium text-[13px] text-black p-2 text-right sm:text-left min-w-[120px]">{t('A1_13')}:</label>
             <input
@@ -129,10 +129,10 @@ const Ind_Search = ({ textDirection1, t }) => {
           </div>
 
           <div className='flex gap-5 flex-wrap sm:flex-nowrap items-center justify-center'>
-            <button className="bg-[#00eb80] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base hover:bg-[#3a7315] cursor-pointer">
+            <button className="bg-[#548c2f] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer">
               {t('A1_14')}
             </button>
-            <button className="bg-blue-500 text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base hover:bg-[#2a4494]" onClick={handleButtonClick}>
+            <button className="bg-[#d62828] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer" onClick={handleButtonClick}>
               {t('A1_15')}
             </button>
           </div>
@@ -147,7 +147,7 @@ const Ind_Search = ({ textDirection1, t }) => {
         onDiscard={() => setShowDialog(false)}
         onNavigate={handleModalConfirm}
       />
-    </>
+    </div>
   );
 };
 
