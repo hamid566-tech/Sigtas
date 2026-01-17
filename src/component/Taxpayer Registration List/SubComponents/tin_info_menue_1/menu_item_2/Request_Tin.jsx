@@ -16,10 +16,8 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   const [addPageCheckboxStates, setAddPageCheckboxStates] = useState([false, false, false, false, false, false, false, false, false, false]); // Adjust based on the number of checkboxes
   const navigate = useNavigate();
   const location = useLocation();
-  const [selectedButton, setSelectedButton] =  useState(() => {
-    // Load the initial value from localStorage
-    return localStorage.getItem('selectedButton') || null; 
-  });
+  const initialButton = localStorage.getItem('selectedButton') || 'آدرس';
+  const [selectedButton, setSelectedButton] =  useState(initialButton);
   
 
   const fields = [
@@ -105,7 +103,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     const shouldShowDialog = specificFieldValue !== "" || unsavedChanges || anyChecked || anyAddPageChecked;
 
     console.log("specificFieldValue: ", specificFieldValue, "unsavedChanges: ", unsavedChanges, "anyAddPageChecked: ", anyAddPageChecked);
-    
+
     if (shouldShowDialog) {
       setShowDialog(true);
     } else {
@@ -120,9 +118,50 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
       'attachment': 'ضمایم',
       'record_history': 'سوابق',
     };
-    setSelectedButton(buttonMap[path] || null);
-  }, [location.pathname]);
 
+    // Update selectedButton based on current path or fallback to stored value
+    const currentButton = buttonMap[path] || selectedButton;
+    setSelectedButton(currentButton);
+    localStorage.setItem('selectedButton', currentButton);
+    
+  }, [location.pathname, selectedButton]); // Include selectedButton to avoid stale closures
+
+
+  const handleNavigation = (event) => {
+    if (unsavedChanges && !showDialog) {
+      event.preventDefault();  // Stop the default navigation
+      setShowDialog(true);  // Show the modal
+    } else if (!unsavedChanges) {
+      navigate('/menu/content');
+    }
+  };
+
+  useEffect(() => {
+    const handlePopState = (event) => {
+      handleNavigation(event);
+    };
+
+    // Push state to enable manual handling on back button
+    window.history.pushState(null, '', window.location.href);
+
+    window.addEventListener('popstate', handlePopState);
+
+    // Before unload event to handle refresh or close
+    const handleBeforeUnload = (event) => {
+      if (unsavedChanges) {
+        const confirmationMessage = "You have unsaved changes. Do you really want to leave?";
+        event.returnValue = confirmationMessage; // Standard for most browsers
+        return confirmationMessage; // For older browsers
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [unsavedChanges, showDialog]);
 
   return (
     <div className="width-full sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 "dir={textDirection}>
@@ -136,7 +175,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
           {renderInputFields().slice(2, 5)} {/* Render first five fields */}
         </div>
       </div>
-      <div className="border border-gray-500 bg-[#c2c2c2] mt-4 flex flex-wrap flex-col md:flex-row justify-between items-center p-4 md:p-6" dir={textDirection1}>
+      <div className="border border-gray-400 bg-[#c2c2c2] mt-4 flex flex-wrap flex-col md:flex-row justify-between items-center p-4 md:p-6" dir={textDirection1}>
         {renderInputFields().slice(5)} {/* Render remaining fields */}
       </div>
       <div className="flex flex-wrap flex-col md:flex-row gap-3 items-center p-4 md:p-6" dir={textDirection1}>
@@ -155,7 +194,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         <Route path="attachment" element={<Attachments textDirection1={textDirection1} t={t} checkboxStates={checkboxStates} setCheckboxStates={setCheckboxStates}/>} />
         <Route path="record_history" element={<Record_history textDirection1={textDirection1} t={t} />} />
       </Routes>
-      <div className="border border-gray-500 rounded-bl-[37px] rounded-br-[37px] bg-[#c2c2c2] mt-4 flex flex-wrap flex-col md:flex-row gap-4 justify-center items-center p-4 md:p-6" dir={textDirection1}>
+      <div className="border border-gray-400 rounded-bl-[37px] rounded-br-[37px] bg-[#c2c2c2] mt-4 flex flex-wrap flex-col md:flex-row gap-4 justify-center items-center p-4 md:p-6" dir={textDirection1}>
         <button className="bg-[#548c2f] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer" >
             ثبت
         </button>

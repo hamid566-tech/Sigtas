@@ -78,7 +78,7 @@ const Add_page = ({ textDirection1, t, setUnsavedChanges, addPageCheckboxStates,
   );
 
   return (
-    <div className="border border-gray-500 overflow-y-auto h-100 bg-[#c2c2c2] flex flex-wrap justify-between items-center p-4" dir={textDirection1}>
+    <div className="border border-gray-400 overflow-y-auto h-100 bg-[#c2c2c2] flex flex-wrap justify-between items-center p-4" dir={textDirection1}>
       {renderInputFields()}
     </div>
   );
