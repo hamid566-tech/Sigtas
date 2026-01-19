@@ -12,7 +12,7 @@ function TaxRegistrationList({ currentLanguage }) {
         
             <div className="flex flex-col bg-white" dir={textDirection}>
                 {/* Main Content */}
-                <div className="container mx-auto w-full px-4 mt-13 md:px-8 lg:px-8 py-6 md:py-8">
+                <div className=" mx w-full px-4 mt-13 md:px-8 lg:px-8 py-6 md:py-8">
                     <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
                         {/* Navigation Links */}
                         <MainMunue currentLanguage={currentLanguage} />

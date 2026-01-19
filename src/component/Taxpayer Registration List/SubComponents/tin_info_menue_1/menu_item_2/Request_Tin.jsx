@@ -12,7 +12,10 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   const inputRefs = useRef(Array(17).fill().map(() => React.createRef()));
   const [unsavedChanges, setUnsavedChanges] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
-  const [checkboxStates, setCheckboxStates] = useState([false, false, false, false]);
+  const [checkboxStates, setCheckboxStates] = useState(() => {
+    const savedCheckboxStates = localStorage.getItem('checkboxStates');
+    return savedCheckboxStates ? JSON.parse(savedCheckboxStates) : [false, false, false, false];
+  });
   const [addPageCheckboxStates, setAddPageCheckboxStates] = useState([false, false, false, false, false, false, false, false, false, false]); // Adjust based on the number of checkboxes
   const navigate = useNavigate();
   const location = useLocation();
@@ -118,16 +121,15 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
       'attachment': 'ضمایم',
       'record_history': 'سوابق',
     };
-
     // Update selectedButton based on current path or fallback to stored value
     const currentButton = buttonMap[path] || selectedButton;
     setSelectedButton(currentButton);
     localStorage.setItem('selectedButton', currentButton);
-    
   }, [location.pathname, selectedButton]); // Include selectedButton to avoid stale closures
 
 
   const handleNavigation = (event) => {
+    const anyChecked = checkboxStates.some(state => state);
     if (unsavedChanges && !showDialog) {
       event.preventDefault();  // Stop the default navigation
       setShowDialog(true);  // Show the modal
@@ -140,12 +142,9 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     const handlePopState = (event) => {
       handleNavigation(event);
     };
-
     // Push state to enable manual handling on back button
     window.history.pushState(null, '', window.location.href);
-
     window.addEventListener('popstate', handlePopState);
-
     // Before unload event to handle refresh or close
     const handleBeforeUnload = (event) => {
       if (unsavedChanges) {
@@ -154,9 +153,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         return confirmationMessage; // For older browsers
       }
     };
-
     window.addEventListener('beforeunload', handleBeforeUnload);
-
     return () => {
       window.removeEventListener('popstate', handlePopState);
       window.removeEventListener('beforeunload', handleBeforeUnload);
