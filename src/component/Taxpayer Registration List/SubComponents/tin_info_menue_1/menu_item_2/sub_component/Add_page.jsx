@@ -34,7 +34,7 @@ const Add_page = ({ textDirection1, t, setUnsavedChanges, addPageCheckboxStates,
 
   const renderInputFields = () => (
     fields.map(({ label, placeholder, type, options }, index) => (
-      <div key={index} className="flex flex-col md:flex-row items-center mb-4 ">
+      <div key={index} className="flex flex-col md:flex-row items-center mb-4  w-[420px]  ">
         <label className="font-medium text-[13px] text-black p-2 items-center text-right sm:text-left w-[250px] md:w-[170px]">{label}:</label>
         {type === 'combo' ? (
           <SearchableComboBox
@@ -78,7 +78,7 @@ const Add_page = ({ textDirection1, t, setUnsavedChanges, addPageCheckboxStates,
   );
 
 
-  
+
 
   return (
     <div className="border border-gray-400 overflow-y-auto h-100 bg-[#c2c2c2] flex flex-wrap justify-between items-center p-4" dir={textDirection1}>
