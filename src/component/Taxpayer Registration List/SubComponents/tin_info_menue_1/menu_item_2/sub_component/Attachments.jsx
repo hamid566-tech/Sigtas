@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-const Attachments = ({ textDirection1, t }) => {
+const Attachments = ({ textDirection1, t, checkboxStates, setCheckboxStates }) => {
+
   const documents = [
     { name: 'پاسپورت' },
     { name: 'کاپی پاسپورت' },
@@ -8,10 +9,10 @@ const Attachments = ({ textDirection1, t }) => {
     { name: 'کاپی تذکره' },
   ];
 
-  const [checkboxStates, setCheckboxStates] = useState(() => {
-    const savedStates = localStorage.getItem('checkboxStates');
-    return savedStates ? JSON.parse(savedStates) : [false, false, false, false];
-  });
+  // const [checkboxStates, setCheckboxStates] = useState(() => {
+  //   const savedStates = localStorage.getItem('checkboxStates');
+  //   return savedStates ? JSON.parse(savedStates) : [false, false, false, false];
+  // });
 
   const handleCheckboxChange = (index, checked) => {
     const newStates = [...checkboxStates];

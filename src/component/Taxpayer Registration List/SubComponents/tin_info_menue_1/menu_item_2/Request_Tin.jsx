@@ -16,7 +16,10 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     const savedCheckboxStates = localStorage.getItem('checkboxStates');
     return savedCheckboxStates ? JSON.parse(savedCheckboxStates) : [false, false, false, false];
   });
-  const [addPageCheckboxStates, setAddPageCheckboxStates] = useState([false, false, false, false, false, false, false, false, false, false]); // Adjust based on the number of checkboxes
+  const [addPageCheckboxStates, setAddPageCheckboxStates] = useState(() => {
+    const savedaddPageCheckboxStates = localStorage.getItem('addPageCheckboxStates');
+    return savedaddPageCheckboxStates ? JSON.parse(savedaddPageCheckboxStates) :[false, false, false, false, false, false, false, false, false, false];
+  }); // Adjust based on the number of checkboxes
   const navigate = useNavigate();
   const location = useLocation();
   const initialButton = localStorage.getItem('selectedButton') || 'آدرس';
@@ -85,6 +88,12 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   const handleModalConfirm = () => {
     setShowDialog(false);
     navigate('/menu/content');
+
+    setCheckboxStates([false, false, false, false]);
+    localStorage.setItem('checkboxStates', JSON.stringify([false, false, false, false]));
+
+    setAddPageCheckboxStates([false, false, false, false, false, false, false, false, false, false]);
+    localStorage.setItem('addPageCheckboxStates', JSON.stringify([false, false, false, false, false, false, false, false, false, false]));
   };
 
   
@@ -111,7 +120,9 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
       setShowDialog(true);
     } else {
       navigate('/menu/content');
+      console.log("showdialo",showDialog)
     }
+
   };
 
   useEffect(() => {
