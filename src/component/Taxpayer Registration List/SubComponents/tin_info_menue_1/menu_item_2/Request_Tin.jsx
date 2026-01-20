@@ -139,17 +139,17 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   }, [location.pathname, selectedButton]); // Include selectedButton to avoid stale closures
 
 
-  const handleNavigation = (event) => {
-    // const anyChecked = checkboxStates.some(state => state);
-    // console.log("unsavedchanges",unsavedChanges,"anychecked",anyChecked)
-    if (unsavedChanges && !showDialog ) {
-      // event.preventDefault();  // Stop the default navigation
-      setShowDialog(true);  // Show the modal
-      console.log("hello")
-    } else if (!unsavedChanges) {
-      navigate('/menu/content');
-    }
-  };
+  // const handleNavigation = (event) => {
+  //   // const anyChecked = checkboxStates.some(state => state);
+  //   // console.log("unsavedchanges",unsavedChanges,"anychecked",anyChecked)
+  //   if (unsavedChanges && !showDialog ) {
+  //     // event.preventDefault();  // Stop the default navigation
+  //     setShowDialog(true);  // Show the modal
+  //     console.log("hello")
+  //   } else if (!unsavedChanges) {
+  //     navigate('/menu/content');
+  //   }
+  // };
 
  const handlePopState = () => {
     const anyChecked = checkboxStates.some(state => state);
@@ -160,19 +160,19 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     }
   };
 
-  useEffect(() => {
-    window.history.pushState(null, "");
-    window.addEventListener('popstate', handlePopState);
+  // useEffect(() => {
+  //   window.history.pushState(null, "");
+  //   window.addEventListener('popstate', handlePopState);
     
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [checkboxStates, unsavedChanges]);
+  //   return () => {
+  //     window.removeEventListener('popstate', handlePopState);
+  //   };
+  // }, [checkboxStates, unsavedChanges]);
 
   useEffect(() => {
-    const handlePopState = () => {
-      handleNavigation();
-    };
+    // const handlePopState = () => {
+    //   handleNavigation();
+    // };
     // Push state to enable manual handling on back button
     window.history.pushState(null, '', window.location.href);
     window.addEventListener('popstate', handlePopState);
@@ -189,7 +189,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
       window.removeEventListener('popstate', handlePopState);
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [unsavedChanges, showDialog]);
+  }, [unsavedChanges, showDialog, checkboxStates]);
 
   return (
     <div className="width-full sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 "dir={textDirection}>
