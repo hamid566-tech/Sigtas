@@ -19,7 +19,10 @@ const Attachments = ({ textDirection1, t, checkboxStates, setCheckboxStates }) =
     newStates[index] = checked;
     setCheckboxStates(newStates);
     localStorage.setItem('checkboxStates', JSON.stringify(newStates));
+    console.log(event.target.checked)
   };
+
+  
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {

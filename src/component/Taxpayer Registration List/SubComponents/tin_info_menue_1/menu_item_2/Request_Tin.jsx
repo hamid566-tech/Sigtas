@@ -114,7 +114,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     const specificFieldValue = inputRefs.current[16] ? inputRefs.current[16].current.value.trim() : '';
     const shouldShowDialog = specificFieldValue !== "" || unsavedChanges || anyChecked || anyAddPageChecked;
 
-    console.log("specificFieldValue: ", specificFieldValue, "unsavedChanges: ", unsavedChanges, "anyAddPageChecked: ", anyAddPageChecked);
+    console.log("specificFieldValue: ", specificFieldValue, "unsavedChanges: ", unsavedChanges,"anyChecked: ",anyChecked, "anyAddPageChecked: ", anyAddPageChecked);
 
     if (shouldShowDialog) {
       setShowDialog(true);
@@ -140,18 +140,38 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
 
 
   const handleNavigation = (event) => {
-    const anyChecked = checkboxStates.some(state => state);
-    if (unsavedChanges && !showDialog) {
-      event.preventDefault();  // Stop the default navigation
+    // const anyChecked = checkboxStates.some(state => state);
+    // console.log("unsavedchanges",unsavedChanges,"anychecked",anyChecked)
+    if (unsavedChanges && !showDialog ) {
+      // event.preventDefault();  // Stop the default navigation
       setShowDialog(true);  // Show the modal
+      console.log("hello")
     } else if (!unsavedChanges) {
       navigate('/menu/content');
     }
   };
 
+ const handlePopState = () => {
+    const anyChecked = checkboxStates.some(state => state);
+    if (anyChecked || unsavedChanges) {
+      setShowDialog(true); // Show the modal instead of a confirmation prompt
+    } else {
+      navigate('/menu/content'); // Navigate away if no unsaved changes
+    }
+  };
+
   useEffect(() => {
-    const handlePopState = (event) => {
-      handleNavigation(event);
+    window.history.pushState(null, "");
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [checkboxStates, unsavedChanges]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      handleNavigation();
     };
     // Push state to enable manual handling on back button
     window.history.pushState(null, '', window.location.href);

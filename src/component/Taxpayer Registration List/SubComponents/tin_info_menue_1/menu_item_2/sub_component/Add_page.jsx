@@ -28,6 +28,7 @@ const Add_page = ({ textDirection1, t, setUnsavedChanges, addPageCheckboxStates,
     const newStates = [...addPageCheckboxStates];
     newStates[index] = checked;
     setAddPageCheckboxStates(newStates);
+    console.log("addPageCheckboxStates: ",addPageCheckboxStates)
     handleInputChange();
   };
 
