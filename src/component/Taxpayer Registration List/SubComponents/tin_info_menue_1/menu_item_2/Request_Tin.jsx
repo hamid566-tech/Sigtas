@@ -153,7 +153,8 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
 
  const handlePopState = () => {
     const anyChecked = checkboxStates.some(state => state);
-    if (anyChecked || unsavedChanges) {
+    const anyAddPageChecked = addPageCheckboxStates.some(state => state);
+    if (anyChecked || unsavedChanges || anyAddPageChecked) {
       setShowDialog(true); // Show the modal instead of a confirmation prompt
     } else {
       navigate('/menu/content'); // Navigate away if no unsaved changes
@@ -189,7 +190,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
       window.removeEventListener('popstate', handlePopState);
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [unsavedChanges, showDialog, checkboxStates]);
+  }, [unsavedChanges, showDialog, checkboxStates, addPageCheckboxStates]);
 
   return (
     <div className="width-full sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 "dir={textDirection}>

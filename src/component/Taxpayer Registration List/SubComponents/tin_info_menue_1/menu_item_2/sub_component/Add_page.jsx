@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { country, district, province } from '../../../Dialog box/data';
 import SearchableComboBox from '../../../Dialog box/SearchableComboBox';
 
@@ -24,14 +24,29 @@ const Add_page = ({ textDirection1, t, setUnsavedChanges, addPageCheckboxStates,
     setUnsavedChanges(hasInput );
   };
 
-  const handleCheckboxChange = (index, checked) => {
-    const newStates = [...addPageCheckboxStates];
-    newStates[index] = checked;
-    setAddPageCheckboxStates(newStates);
-    console.log("addPageCheckboxStates: ",addPageCheckboxStates)
-    handleInputChange();
-  };
+  // const handleCheckboxChange = (index, checked) => {
+  //   const newStates = [...addPageCheckboxStates];
+  //   newStates[index] = checked;
+  //   setAddPageCheckboxStates(newStates);
+  //   localStorage.setItem('addPageCheckboxStates', JSON.stringify(newStates));
+  //   console.log("addPageCheckboxStates: ",addPageCheckboxStates)
+  //   handleInputChange();
+  // };
 
+  // const handleCheckboxChange = (index, checked) => {
+  //   const newStates = [...addPageCheckboxStates];
+  //   newStates[index] = checked;
+  //   setAddPageCheckboxStates(newStates);
+  //   localStorage.setItem('addPageCheckboxStates', JSON.stringify(newStates));
+  //   console.log(event.target.checked)
+  // };
+
+const handleCheckboxChange = (index) => {
+  const newStates = [...addPageCheckboxStates];
+  newStates[index] = !newStates[index]; // Toggle checkbox state
+  setAddPageCheckboxStates(newStates);
+  localStorage.setItem('addPageCheckboxStates', JSON.stringify(newStates));
+};
 
   const renderInputFields = () => (
     fields.map(({ label, placeholder, type, options }, index) => (
@@ -53,8 +68,8 @@ const Add_page = ({ textDirection1, t, setUnsavedChanges, addPageCheckboxStates,
         ) : type === 'checkbox' ? (
           <input className='cursor-pointer w-[20px] h-[20px] ml-20'
             type="checkbox"
-            checked={addPageCheckboxStates[index]}
-            onChange={(e) => handleCheckboxChange(index, e.target.checked)}
+            checked={addPageCheckboxStates[index] || false}
+            onChange={(e) => handleCheckboxChange(index)}
           />
         ) : (
           <input
@@ -79,6 +94,45 @@ const Add_page = ({ textDirection1, t, setUnsavedChanges, addPageCheckboxStates,
   );
 
 
+
+
+  
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      const anyChecked = addPageCheckboxStates.some(state => state);
+      if (anyChecked) {
+        const confirmationMessage = "You have unsaved changes. Do you really want to leave?";
+        event.returnValue = confirmationMessage; // Standard for most browsers
+        return confirmationMessage; // For older browsers
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [addPageCheckboxStates]);
+
+  const handleResetStates = () => {
+    setAddPageCheckboxStates([false, false, false, false]);
+    localStorage.setItem('addPageCheckboxStates', JSON.stringify([false, false, false, false]));
+  };
+
+  useEffect(() => {
+    window.addEventListener('pagehide', (event) => {
+      const anyChecked = addPageCheckboxStates.some(state => state);
+      if (anyChecked) {
+        // Only reset checkbox states on navigation away
+        handleResetStates();
+      }
+    });
+
+     return () => {
+      window.removeEventListener('pagehide', handleResetStates);
+    };
+  }, [addPageCheckboxStates]);
 
 
   return (
