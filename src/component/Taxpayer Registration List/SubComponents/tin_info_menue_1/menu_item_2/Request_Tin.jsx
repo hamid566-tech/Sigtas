@@ -22,7 +22,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   }); // Adjust based on the number of checkboxes
   const navigate = useNavigate();
   const location = useLocation();
-  const initialButton = localStorage.getItem('selectedButton') || 'آدرس';
+  const initialButton = localStorage.getItem('selectedButton') || t('A2_20');
   const [selectedButton, setSelectedButton] =  useState(initialButton);
   
 
@@ -44,6 +44,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     { label: t('A2_16'), placeholder: t('A2_16'), type: 'number' },
     { label: t('A2_17'), placeholder: t('A2_17'), type: 'textAndNumber' },
     { label: t('A2_18'), placeholder: t('A2_18'), type: 'textAndNumber' },
+    { label: t('A2_19'), placeholder: t('A2_19'), type: 'text' },
   ];
 
   const renderInputFields = () => (
@@ -105,7 +106,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   const handleButtonClick_menu = (buttonType) => {
     setSelectedButton(buttonType);
     localStorage.setItem('selectedButton', buttonType); // Store the selected button in localStorage
-    navigate(`/menu/content/request_tin${buttonType === 'ضمایم' ? '/attachment' : buttonType === 'سوابق' ? '/record_history' : ''}`);
+    navigate(`/menu/content/request_tin${buttonType === t('A2_21') ? '/attachment' : buttonType === t('A2_22') ? '/record_history' : ''}`);
   };
 
   const handleButtonClick = () => {
@@ -128,28 +129,17 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   useEffect(() => {
     const path = location.pathname.split('/').pop();
     const buttonMap = {
-      'request_tin': 'آدرس',
-      'attachment': 'ضمایم',
-      'record_history': 'سوابق',
+      'request_tin': t('A2_20'),
+      'attachment': t('A2_21'),
+      'record_history': t('A2_22'),
     };
     // Update selectedButton based on current path or fallback to stored value
     const currentButton = buttonMap[path] || selectedButton;
     setSelectedButton(currentButton);
     localStorage.setItem('selectedButton', currentButton);
-  }, [location.pathname, selectedButton]); // Include selectedButton to avoid stale closures
+  }, [location.pathname, selectedButton,t]); // Include selectedButton to avoid stale closures
 
 
-  // const handleNavigation = (event) => {
-  //   // const anyChecked = checkboxStates.some(state => state);
-  //   // console.log("unsavedchanges",unsavedChanges,"anychecked",anyChecked)
-  //   if (unsavedChanges && !showDialog ) {
-  //     // event.preventDefault();  // Stop the default navigation
-  //     setShowDialog(true);  // Show the modal
-  //     console.log("hello")
-  //   } else if (!unsavedChanges) {
-  //     navigate('/menu/content');
-  //   }
-  // };
 
  const handlePopState = () => {
     const anyChecked = checkboxStates.some(state => state);
@@ -161,19 +151,9 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     }
   };
 
-  // useEffect(() => {
-  //   window.history.pushState(null, "");
-  //   window.addEventListener('popstate', handlePopState);
-    
-  //   return () => {
-  //     window.removeEventListener('popstate', handlePopState);
-  //   };
-  // }, [checkboxStates, unsavedChanges]);
 
   useEffect(() => {
-    // const handlePopState = () => {
-    //   handleNavigation();
-    // };
+    
     // Push state to enable manual handling on back button
     window.history.pushState(null, '', window.location.href);
     window.addEventListener('popstate', handlePopState);
@@ -208,7 +188,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         {renderInputFields().slice(5)} {/* Render remaining fields */}
       </div>
       <div className="flex flex-wrap flex-col md:flex-row gap-3 items-center p-4 md:p-6" dir={textDirection1}>
-        {['آدرس', 'ضمایم', 'سوابق'].map((btnType) => (
+        {[t('A2_20'), t('A2_21'), t('A2_22')].map((btnType) => (
           <button
             key={btnType}
             onClick={() => handleButtonClick_menu(btnType)}
@@ -225,13 +205,13 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
       </Routes>
       <div className="border border-gray-400 rounded-bl-[37px] rounded-br-[37px] bg-[#c2c2c2] mt-4 flex flex-wrap flex-col md:flex-row gap-4 justify-center items-center p-4 md:p-6" dir={textDirection1}>
         <button className="bg-[#548c2f] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer" >
-            ثبت
+            {t('Z1_8')}
         </button>
         <button className="bg-blue-500 text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer">
-            درخواست تایید توسط سیستم
+             {t('Z1_7')}   
         </button>
         <button className="bg-[#d62828] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer" onClick={handleButtonClick}>
-            {t('A1_15')}
+            {t('Z1_6')}
         </button>
       </div>
     </section>

@@ -130,10 +130,10 @@ const Ind_Search = ({textDirection, textDirection1, t }) => {
 
           <div className='flex gap-5 flex-wrap sm:flex-nowrap items-center justify-center'>
             <button className="bg-[#548c2f] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer">
-              {t('A1_14')}
+              {t('Z1_5')}
             </button>
             <button className="bg-[#d62828] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer" onClick={handleButtonClick}>
-              {t('A1_15')}
+              {t('Z1_6')}
             </button>
           </div>
         </div>

@@ -3,16 +3,13 @@ import React, { useEffect, useState } from 'react';
 const Attachments = ({ textDirection1, t, checkboxStates, setCheckboxStates }) => {
 
   const documents = [
-    { name: 'پاسپورت' },
-    { name: 'کاپی پاسپورت' },
-    { name: 'تذکره' },
-    { name: 'کاپی تذکره' },
+    { name: t('A4_4') },
+    { name: t('A4_5') },
+    { name: t('A4_6') },
+    { name: t('A4_7') },
   ];
 
-  // const [checkboxStates, setCheckboxStates] = useState(() => {
-  //   const savedStates = localStorage.getItem('checkboxStates');
-  //   return savedStates ? JSON.parse(savedStates) : [false, false, false, false];
-  // });
+ 
 
   const handleCheckboxChange = (index, checked) => {
     const newStates = [...checkboxStates];
@@ -65,9 +62,9 @@ const Attachments = ({ textDirection1, t, checkboxStates, setCheckboxStates }) =
       <table className="min-w-full">
         <thead>
           <tr>
-            <th className="border bg-[#ddb892] border-cyan-400/60 px-4 py-2 min-w-[250px]">سند</th>
-            <th className="border bg-[#ddb892] border-cyan-400/60 px-4 py-2 min-w-[250px]">لازم</th>
-            <th className="border bg-[#ddb892] border-cyan-400/60 px-4 py-2 min-w-[250px]">حصول</th>
+            <th className="border bg-[#ddb892] border-cyan-400/60 px-4 py-2 min-w-[250px]">{t('A4_1')}</th>
+            <th className="border bg-[#ddb892] border-cyan-400/60 px-4 py-2 min-w-[250px]">{t('A4_2')}</th>
+            <th className="border bg-[#ddb892] border-cyan-400/60 px-4 py-2 min-w-[250px]">{t('A4_3')}</th>
           </tr>
         </thead>
         <tbody className="text-center">

@@ -38,7 +38,7 @@ const SearchableComboBox = ({ textDirection1, options, placeholder, onChange, re
            onChange(e); // Call parent onChange
         }}
         onFocus={() => setIsOpen(true)} // Open dropdown when focused
-        className="flex-grow w-[250px] h-[38px] bg-white pl-2 border border-solid border-[#7e7a7a] pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+        className="flex-grow w-[250px] h-[38px] bg-white pl-2 border cursor-pointer  border-solid border-[#7e7a7a] pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
         ref={ref} // Keep the ref for possible external manipulations
       />
       
