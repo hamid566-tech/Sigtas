@@ -69,7 +69,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         <input
           type="date"
           ref={inputRefs.current[index]}
-          className="flex-grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+          className="grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
           placeholder={placeholder}
           onInput={handleInputChange} // Call your input change handler
           readOnly
@@ -83,7 +83,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
           <input
             type={type === 'numberWithDash' ? 'text' : 'text'}
             ref={inputRefs.current[index]}
-            className="flex-grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+            className="grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
             placeholder={placeholder}
             onInput={(e) => {
               if (type === 'number') {
