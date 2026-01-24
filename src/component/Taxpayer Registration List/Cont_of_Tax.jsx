@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const TaxButton = ({ imageSrc, label, path }) => (
   <Link
     to={path}
-    className="flex flex-col items-center gap-3 hover:scale-110 hover:bg-gray-50 transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]"
+    className="flex flex-col min-w-40 min-h-40 justify-center items-center gap-3 hover:scale-110 hover:bg-gray-50 hover:rounded-[20px] transition-transform duration-200 ease-in-out cursor-pointer border-b-2 border-transparent hover:border-b-[#3a86ff]"
   >
     <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
       <img src={imageSrc} alt="" className="w-full h-full object-cover" />
@@ -50,10 +50,10 @@ const Cont_of_Tax = ({textDirection, textDirection1, t }) => {
 
   const renderSection = (title, buttons) => (
     <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-400/60 shadow-[0px_0_10px_1px_rgba(0,43,255,0.32)] p-4 md:p-6" dir={textDirection1}>
-      <div className=" border border-cyan-500/60 rounded-[37px]  p-4 md:p-6 mb-3">
+      <div className=" border border-cyan-500/60 bg-[rgba(171,196,255,0.9)] rounded-[37px]  p-4 md:p-6 mb-3">
       <h2 className="text-center text-base md:text-lg font-semibold text-black ">{title}</h2>
       </div>
-      <div className=" border border-cyan-500/60 rounded-[37px]  p-4 md:p-6">
+      <div className=" border border-cyan-500/60 bg-[#c2c2c2] rounded-[37px]  p-4 md:p-6">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
           {buttons.map(({ src, label, path }, index) => (
             <TaxButton key={index} imageSrc={src} label={label} path={path} />

@@ -44,7 +44,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     { label: t('A2_16'), placeholder: t('A2_16'), type: 'number' },
     { label: t('A2_17'), placeholder: t('A2_17'), type: 'textAndNumber' },
     { label: t('A2_18'), placeholder: t('A2_18'), type: 'textAndNumber' },
-    { label: t('A2_19'), placeholder: t('A2_19'), type: 'text' },
+    { label: t('A2_19'), placeholder: t('A2_19'), type: 'date' },
   ];
 
   const renderInputFields = () => (
@@ -64,7 +64,15 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
             }}
             ref={inputRefs.current[index]}
           />
-        ) : (
+        )  : type === 'date' ? ( // New date input type
+        <input
+          type="date"
+          ref={inputRefs.current[index]}
+          className="flex-grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+          placeholder={placeholder}
+          onInput={handleInputChange} // Call your input change handler
+        />
+      ) : (
           <input
             type={type === 'numberWithDash' ? 'text' : 'text'}
             ref={inputRefs.current[index]}

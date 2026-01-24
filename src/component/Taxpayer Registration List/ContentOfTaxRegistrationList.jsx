@@ -12,13 +12,7 @@ function ContentOfTaxRegistrationList({ currentLanguage }) {
   const textDirection1 = (currentLanguage === 'دری' || currentLanguage === 'پښتو') ? 'rtl' : 'ltr';
   const { t } = useTranslation();
 
-   // Scroll to top on location change for specific paths
-  // useEffect(() => {
-  //   if (location.pathname.includes('/menu/content')) {
-  //     window.scrollTo(0, 0); 
-  //     console.log("Scrolled to top on:", location.pathname);
-  //   }
-  // }, [location]);
+
 
   return (
     < >
