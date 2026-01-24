@@ -6,10 +6,11 @@ import Record_history from './sub_component/Record_history';
 import { documentTypeNumber, country, taxCenter } from '../../Dialog box/data';
 import SearchableComboBox from '../../Dialog box/SearchableComboBox';
 import Modal from '../../Dialog box/Modal';
+import moment from 'moment-jalaali';
 
 const Request_Tin = ({textDirection, textDirection1, t }) => {
 
-  const inputRefs = useRef(Array(17).fill().map(() => React.createRef()));
+  const inputRefs = useRef(Array(18).fill().map(() => React.createRef()));
   const [unsavedChanges, setUnsavedChanges] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [checkboxStates, setCheckboxStates] = useState(() => {
@@ -71,6 +72,12 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
           className="flex-grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
           placeholder={placeholder}
           onInput={handleInputChange} // Call your input change handler
+          readOnly
+          onDoubleClick={() => {
+            const todayJalaali = moment().format('jYYYY-jMM-jDD'); // Get today's date in Jalaali format
+            inputRefs.current[index].current.value = todayJalaali; // Set the value to today'sdate
+            handleInputChange();
+          }}
         />
       ) : (
           <input
