@@ -28,11 +28,11 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   
 
   const fields = [
-    { label: t('A2_2'), placeholder: t('A2_2'), type: 'number' },
-    { label: t('A2_3'), placeholder: t('A2_3'), type: 'text' },
-    { label: t('A2_4'), placeholder: t('A2_4'), type: 'number' },
-    { label: t('A2_5'), placeholder: t('A2_5'), type: 'number' },
-    { label: t('A2_6'), placeholder: t('A2_6'), type: 'number' },
+    { label: t('A2_2'), placeholder: t('A2_2'), type: 'number'},
+    { label: t('A2_3'), placeholder: t('A2_3'), type: 'text', readOnly:true },
+    { label: t('A2_4'), placeholder: t('A2_4'), type: 'number', readOnly:true },
+    { label: t('A2_5'), placeholder: t('A2_5'), type: 'number', readOnly:true },
+    { label: t('A2_6'), placeholder: t('A2_6'), type: 'number', readOnly:true},
     { label: t('A2_7'), placeholder: t('A2_7'), type: 'text' },
     { label: t('A2_8'), placeholder: t('A2_8'), type: 'text' },
     { label: t('A2_9'), placeholder: t('A2_9'), type: 'text' },
@@ -45,11 +45,11 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     { label: t('A2_16'), placeholder: t('A2_16'), type: 'number' },
     { label: t('A2_17'), placeholder: t('A2_17'), type: 'textAndNumber' },
     { label: t('A2_18'), placeholder: t('A2_18'), type: 'textAndNumber' },
-    { label: t('A2_19'), placeholder: t('A2_19'), type: 'date' },
+    { label: t('A2_19'), placeholder: t('A2_19'), type: 'date', readOnly:true},
   ];
 
   const renderInputFields = () => (
-    fields.map(({ label, placeholder, type, options }, index) => (
+    fields.map(({ label, placeholder, type, options, readOnly}, index) => (
       <div key={index} className="flex flex-col md:flex-row items-center mb-4">
         <label className="font-medium text-[13px] text-black p-2 items-center text-right sm:text-left w-[250px] md:w-[170px]">{label}:</label>
         {type === 'combo' ? (
@@ -67,17 +67,17 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
           />
         )  : type === 'date' ? ( // New date input type
         <input
-          type="date"
+          type="text"
           ref={inputRefs.current[index]}
-          className="grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+          className="grow h-[38px] w-[250px] bg-white border border-solid text-gray-500 border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
           placeholder={placeholder}
-          onInput={handleInputChange} // Call your input change handler
-          readOnly
-          onDoubleClick={() => {
-            const todayJalaali = moment().format('jYYYY-jMM-jDD'); // Get today's date in Jalaali format
-            inputRefs.current[index].current.value = todayJalaali; // Set the value to today'sdate
-            handleInputChange();
-          }}
+          value={moment().format('jYYYY-jMM-jDD')}
+          onFocus={(e) => {e.target.select()}}
+          // onDoubleClick={() => {
+          //   const todayJalaali = moment().format('jYYYY-jMM-jDD'); // Get today's date in Jalaali format
+          //   inputRefs.current[index].current.value = todayJalaali; // Set the value to today'sdate
+          //   handleInputChange();
+          // }}
         />
       ) : (
           <input
@@ -85,6 +85,8 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
             ref={inputRefs.current[index]}
             className="grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
             placeholder={placeholder}
+            readOnly={readOnly}
+            onFocus={(e)=> e.target.select()}
             onInput={(e) => {
               if (type === 'number') {
                 e.target.value = e.target.value.replace(/[^0-9]/g, '');
@@ -188,8 +190,8 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   }, [unsavedChanges, showDialog, checkboxStates, addPageCheckboxStates]);
 
   return (
-    <div className="width-full sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 "dir={textDirection}>
-    <section className="bg-white/10 backdrop-blur-sm rounded-[37px] border border-cyan-400/60 shadow-[0px_0_10px_1px_rgba(0,43,255,0.32)] p-4 md:p-6">
+    <div className="width-full bg-gray-800 sm:flex-1 space-y-6 md:space-y-8 px-4 md:px-10 py-8 mt-3 h-[83vh] overflow-y-auto border border-cyan-300/60 "dir={textDirection}>
+    <section className="bg-gray-400 backdrop-blur-sm rounded-[37px] border border-cyan-400/60 shadow-[0px_0_10px_1px_rgba(0,43,255,0.32)] p-4 md:p-6">
       <h2 className="text-center text-base md:text-lg font-semibold text-black mb-6">{t('A2_1')}</h2>
       <div className="border border-gray-500 rounded-tl-[37px] rounded-tr-[37px] bg-[rgba(171,196,255,0.9)] flex flex-wrap flex-col md:flex-row justify-between items-center p-4 md:p-6" dir={textDirection1}>
         <div className='flex flex-col'>
