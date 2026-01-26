@@ -209,7 +209,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
           <button
             key={btnType}
             onClick={() => handleButtonClick_menu(btnType)}
-            className={`min-w-[100px] p-2 rounded-[5px] ${selectedButton === btnType ? 'bg-[#8ac926]' : 'bg-[#42a5f5]'} text-[#ffe5ec] opacity-80 hover:opacity-100 outline-none cursor-pointer`}
+            className={`min-w-[100px] p-2 rounded-[5px] ${selectedButton === btnType ? 'bg-green-800 hover:bg-green-700' : 'bg-blue-800 hover:bg-blue-700'} text-[#ffe5ec] outline-none cursor-pointer`}
           >
             {btnType}
           </button>
