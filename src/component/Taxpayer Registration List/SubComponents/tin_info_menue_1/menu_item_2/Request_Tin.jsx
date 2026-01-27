@@ -7,6 +7,7 @@ import { documentTypeNumber, country, taxCenter } from '../../Dialog box/data';
 import SearchableComboBox from '../../Dialog box/SearchableComboBox';
 import Modal from '../../Dialog box/Modal';
 import moment from 'moment-jalaali';
+import search_logo_icon from '../../../../../assets/search_logo_icon.png'
 
 const Request_Tin = ({textDirection, textDirection1, t }) => {
 
@@ -71,13 +72,12 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
           ref={inputRefs.current[index]}
           className="grow h-[38px] w-[250px] bg-white border border-solid text-gray-500 border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
           placeholder={placeholder}
-          value={moment().format('jYYYY-jMM-jDD')}
-          onFocus={(e) => {e.target.select()}}
-          // onDoubleClick={() => {
-          //   const todayJalaali = moment().format('jYYYY-jMM-jDD'); // Get today's date in Jalaali format
-          //   inputRefs.current[index].current.value = todayJalaali; // Set the value to today'sdate
-          //   handleInputChange();
-          // }}
+          readOnly={readOnly}
+          onDoubleClick={() => {
+            const todayJalaali = moment().format('jYYYY-jMM-jDD'); // Get today's date in Jalaali format
+            inputRefs.current[index].current.value = todayJalaali; // Set the value to today'sdate
+            handleInputChange();
+          }}
         />
       ) : (
           <input
@@ -99,7 +99,13 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
             }}
           />
         )}
+        {index === 0 && (
+          <button className='mr-3 p-3 rounded-full bg-gray-500 cursor-pointer hover:bg-gray-400'>
+            <img src={search_logo_icon} className='w-7' />
+          </button>
+        )}
       </div>
+      
     ))
   );
 
