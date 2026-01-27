@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 const Ind_Search = ({textDirection, textDirection1, t }) => {
   
   const navigate = useNavigate();
-  const inputRefs = useRef(Array(11).fill().map(() => React.createRef()));
+  const inputRefs = useRef(Array(12).fill().map(() => React.createRef()));
+  const inputRefsecond = useRef(Array(12).fill().map(() => React.createRef()));
   const [showDialog, setShowDialog] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
@@ -41,7 +42,7 @@ const Ind_Search = ({textDirection, textDirection1, t }) => {
   ];
 
   const handleInputChange = () => {
-    const hasInput = inputRefs.current.some(ref => ref.current.value.trim() !== "");
+    const hasInput = inputRefs.current.some(ref => ref.current && ref.current.value.trim() !== "") || inputRefsecond.current.some(ref => ref.current && ref.current.value.trim() !== "");
     setUnsavedChanges(hasInput);
   };
 
@@ -82,11 +83,13 @@ const Ind_Search = ({textDirection, textDirection1, t }) => {
   }, [unsavedChanges, showDialog]);
 
   const handleButtonClick = () => {
-    const specificFieldValue = inputRefs.current[10].current.value.trim();
-    if (specificFieldValue !== "" || unsavedChanges) {
-      setShowDialog(true);
+    const specificFieldValueInFirstSection = inputRefs.current.some(ref => ref.current && ref.current.value.trim() !== "");
+    const specificFieldValueInSecondSection = inputRefsecond.current.some(ref => ref.current && ref.current.value.trim() !== "");
+
+    if (specificFieldValueInFirstSection || specificFieldValueInSecondSection || unsavedChanges) {
+        setShowDialog(true);
     } else {
-      navigate('/menu/content');
+        navigate('/menu/content');
     }
   };
 
@@ -117,7 +120,7 @@ const Ind_Search = ({textDirection, textDirection1, t }) => {
         <label className="font-medium text-[13px] text-black p-2 items-center text-right sm:text-left w-[250px] md:w-[170px]">{label}:</label>
         <input
           type="text"
-          ref={inputRefs.current[index]}
+          ref={inputRefsecond.current[index]}
           className="grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
           placeholder={placeholder}
           readOnly={readOnly}
@@ -145,7 +148,7 @@ const Ind_Search = ({textDirection, textDirection1, t }) => {
             <label className="font-medium text-[13px] text-black p-2 text-right sm:text-left min-w-[120px]">{t('A1_13')}:</label>
             <input
               type="text"
-              ref={inputRefs.current[10]}
+              ref={inputRefs.current[12]}
               className="grow h-[38px] max-w-[200px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
               placeholder={t('A1_13')}
               readOnly
@@ -188,7 +191,7 @@ const Ind_Search = ({textDirection, textDirection1, t }) => {
             <label className="font-medium text-[13px] text-black p-2 text-right sm:text-left min-w-[120px]">{t('A1_26')}:</label>
             <input
               type="text"
-              ref={inputRefs.current[10]}
+              ref={inputRefsecond.current[12]}
               className="grow h-[38px] max-w-[200px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
               placeholder={t('A1_26')}
               readOnly
