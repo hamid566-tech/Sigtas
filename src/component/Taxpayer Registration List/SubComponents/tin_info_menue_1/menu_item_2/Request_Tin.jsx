@@ -27,6 +27,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   const initialButton = localStorage.getItem('selectedButton') || t('A2_20');
   const [selectedButton, setSelectedButton] =  useState(initialButton);
   
+ 
 
   const fields = [
     { label: t('A2_2'), placeholder: t('A2_2'), type: 'number'},
@@ -49,10 +50,87 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     { label: t('A2_19'), placeholder: t('A2_19'), type: 'date', readOnly:true},
   ];
 
+    const [inputValues, setInputValues] = useState(Array(fields.length).fill(''));
+
+  const [errorMessages, setErrorMessages] = useState({
+    field_6:'',
+    field_7:'',
+    field_8:'',
+    field_9:''
+  });
+
+  const errorMessageKeys = {
+    field_6: 'Z1_9',
+    field_7: 'Z1_9',
+    field_8: 'Z1_9',
+    field_9: 'Z1_9'
+  };
+
+   // Update error messages whenever the component mounts or the language changes
+  useEffect(() => {
+    const newErrorMessages = {
+      field_6: '',
+      field_7: '',
+      field_8: '',
+      field_9: ''
+    };
+    setErrorMessages(newErrorMessages);
+  }, [t]); // Re-run whenever the translation function changes (language change)
+
+
+ const handleButtonClick_save = () => {
+    const newErrorMessages = {
+        field_6: '',
+        field_7: '',
+        field_8: '',
+        field_9: ''
+    };
+
+    let hasErrors = false;
+
+    // Check Field A2_7
+    if (!inputValues[5]?.trim()) {
+        newErrorMessages.field_6 = t(errorMessageKeys.field_6);
+        hasErrors = true;
+    }
+
+    // Check Field A2_8
+    if (!inputValues[6]?.trim()) {
+        newErrorMessages.field_7 = t(errorMessageKeys.field_7);
+        hasErrors = true;
+    }
+
+    // Check Field A2_9
+    if (!inputValues[7]?.trim()) {
+        newErrorMessages.field_8 = t(errorMessageKeys.field_8);
+        hasErrors = true;
+    }
+
+    // Check Field A2_10
+    if (!inputValues[8]?.trim()) {
+        newErrorMessages.field_9 = t(errorMessageKeys.field_9);
+        hasErrors = true;
+    }
+
+    setErrorMessages(newErrorMessages);
+
+    // Proceed if no errors
+    if (!hasErrors) {
+        // navigate('/menu/content');
+        console.log("hello")
+
+    }
+};
+
   const renderInputFields = () => (
     fields.map(({ label, placeholder, type, options, readOnly}, index) => (
+      <div key={index}>
+        {errorMessages[`field_${index + 1}`] && (
+            <div className={`text-[#c1121f] text-md font-bold mb-1 ${textDirection === 'rtl' ? 'text-right' : 'text-left'}`}>{errorMessages[`field_${index + 1}`]}</div>
+          )}
       <div key={index} className="flex flex-col md:flex-row items-center mb-4">
         <label className="font-medium text-[13px] text-black p-2 items-center text-right sm:text-left w-[250px] md:w-[170px]">{label}:</label>
+        
         {type === 'combo' ? (
           <SearchableComboBox
             textDirection1={textDirection1}
@@ -62,13 +140,16 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
               if (inputRefs.current[index]) {
                 inputRefs.current[index].current.value = value; // Set value for the select
               }
-              handleInputChange(); // Check for unsaved changes
+              handleInputChange(index, value); // Check for unsaved changes
             }}
+            value={inputValues[index]} // Controlled input
             ref={inputRefs.current[index]}
           />
         )  : type === 'date' ? ( // New date input type
         <input
           type="text"
+          value={inputValues[index]} // Controlled input
+          // onChange={(e) => handleInputChange(index, e.target.value)}
           ref={inputRefs.current[index]}
           className="grow h-[38px] w-[250px] bg-white border border-solid text-gray-500 border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
           placeholder={placeholder}
@@ -76,14 +157,16 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
           onDoubleClick={() => {
             const todayJalaali = moment().format('jYYYY-jMM-jDD'); // Get today's date in Jalaali format
             inputRefs.current[index].current.value = todayJalaali; // Set the value to today'sdate
-            handleInputChange();
+            handleInputChange(index, e.target.value);
           }}
         />
       ) : (
           <input
             type={type === 'numberWithDash' ? 'text' : 'text'}
+            value={inputValues[index]} // Controlled input
+            // onChange={(e) => handleInputChange(index, e.target.value)}
             ref={inputRefs.current[index]}
-            className="grow h-[38px] w-[250px] bg-white border border-solid border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+            className={`grow h-[38px] w-[250px] bg-white border border-solid ${errorMessages[`field_${index + 1}`] ? 'border-[#c1121f] border-3 ring-3 ring-red-300' : 'border-[#7e7a7a]'} px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300`}
             placeholder={placeholder}
             readOnly={readOnly}
             onFocus={(e)=> e.target.select()}
@@ -95,10 +178,11 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
               } else if (type === 'numberWithDash') {
                 e.target.value = e.target.value.replace(/[^0-9-]/g, '');
               }
-              handleInputChange();
+              handleInputChange(index, e.target.value);
             }}
           />
         )}
+        
         {index === 0 && (
           <button className='mr-3 p-3 rounded-full bg-gray-500 cursor-pointer hover:bg-gray-400'>
             <img src={search_logo_icon} className='w-7' />
@@ -106,8 +190,11 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         )}
       </div>
       
+          </div>
     ))
   );
+
+
 
   const handleModalConfirm = () => {
     setShowDialog(false);
@@ -121,9 +208,14 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   };
 
   
-  const handleInputChange = () => {
-    const hasInput = inputRefs.current.some(ref => ref.current.value.trim() !== "");
-    setUnsavedChanges(hasInput);
+  const handleInputChange = (index, value) => {
+    // const hasInput = inputRefs.current.some(ref => ref.current.value.trim() !== "");
+    // setUnsavedChanges(hasInput);
+     const updatedValues = [...inputValues];
+    updatedValues[index] = value;
+    setInputValues(updatedValues);
+    // Check for unsaved changes
+    setUnsavedChanges(updatedValues.some(val => val.trim() !== ''));
   };
 
   const handleButtonClick_menu = (buttonType) => {
@@ -227,8 +319,8 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         <Route path="record_history" element={<Record_history textDirection1={textDirection1} t={t} />} />
       </Routes>
       <div className="border border-gray-400 rounded-bl-[37px] rounded-br-[37px] bg-[#c2c2c2] mt-4 flex flex-wrap flex-col md:flex-row gap-4 justify-center items-center p-4 md:p-6" dir={textDirection1}>
-        <button className="bg-[#548c2f] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer" >
-            {t('Z1_8')}
+        <button className="bg-[#548c2f] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer" onClick={handleButtonClick_save} >
+            {t('Z1_8') }
         </button>
         <button className="bg-blue-500 text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer">
              {t('Z1_7')}   
