@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import down_icon from '../../../../assets/down_icon.png';
 
-const SearchableComboBox = ({ textDirection1, options, placeholder, onChange, ref }) => {
+const SearchableComboBox = ({ textDirection1, options, placeholder, onChange, value, error, ref }) => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -35,10 +35,10 @@ const SearchableComboBox = ({ textDirection1, options, placeholder, onChange, re
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
-           onChange(e); // Call parent onChange
+           onChange(e.target.value); // Call parent onChange
         }}
         onFocus={() => setIsOpen(true)} // Open dropdown when focused
-        className="flex-grow w-[250px] h-[38px] bg-white pl-2 border cursor-pointer  border-solid border-[#7e7a7a] pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+        className={`flex-grow w-[250px] h-[38px] bg-white pl-2 border cursor-pointer  border-solid ${error ? 'border-[#c1121f] border-3 ring-3 ring-red-300' : 'border-[#7e7a7a]'} pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300`}
         ref={ref} // Keep the ref for possible external manipulations
       />
       

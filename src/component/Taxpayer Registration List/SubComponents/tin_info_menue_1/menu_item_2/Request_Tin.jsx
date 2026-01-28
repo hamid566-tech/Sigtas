@@ -53,17 +53,36 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     const [inputValues, setInputValues] = useState(Array(fields.length).fill(''));
 
   const [errorMessages, setErrorMessages] = useState({
-    field_6:'',
-    field_7:'',
-    field_8:'',
-    field_9:''
+      field_6:'',
+      field_7:'',
+      field_8:'',
+      field_9:'',
+      field_10: '',
+      field_11: '',
+      field_12: '',
+      field_13: '',
+      field_14: '',
+      field_15: '',
+      field_16: '',
+      field_17: '',
+      field_18: '',
+      field_19: ''
   });
 
   const errorMessageKeys = {
-    field_6: 'Z1_9',
-    field_7: 'Z1_9',
-    field_8: 'Z1_9',
-    field_9: 'Z1_9'
+      field_6: 'Z1_9',
+      field_7: 'Z1_9',
+      field_8: 'Z1_9',
+      field_9: 'Z1_9',
+      field_10: 'Z1_9',
+      field_11: 'Z1_9',
+      field_12: 'Z1_9',
+      field_13: 'Z1_9',
+      field_14: 'Z1_9',
+      field_15: 'Z1_9',
+      field_16: 'Z1_9',
+      field_17: 'Z1_9',
+      field_18: 'Z1_9'
   };
 
    // Update error messages whenever the component mounts or the language changes
@@ -72,7 +91,16 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
       field_6: '',
       field_7: '',
       field_8: '',
-      field_9: ''
+      field_9: '',
+      field_10: '',
+      field_11: '',
+      field_12: '',
+      field_13: '',
+      field_14: '',
+      field_15: '',
+      field_16: '',
+      field_17: '',
+      field_18: ''
     };
     setErrorMessages(newErrorMessages);
   }, [t]); // Re-run whenever the translation function changes (language change)
@@ -83,33 +111,26 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         field_6: '',
         field_7: '',
         field_8: '',
-        field_9: ''
+        field_9: '',
+        field_10: '',
+        field_11: '',
+        field_12: '',
+        field_13: '',
+        field_14: '',
+        field_15: '',
+        field_16: '',
+        field_17: '',
+        field_18: ''
     };
 
     let hasErrors = false;
 
-    // Check Field A2_7
-    if (!inputValues[5]?.trim()) {
-        newErrorMessages.field_6 = t(errorMessageKeys.field_6);
-        hasErrors = true;
-    }
-
-    // Check Field A2_8
-    if (!inputValues[6]?.trim()) {
-        newErrorMessages.field_7 = t(errorMessageKeys.field_7);
-        hasErrors = true;
-    }
-
-    // Check Field A2_9
-    if (!inputValues[7]?.trim()) {
-        newErrorMessages.field_8 = t(errorMessageKeys.field_8);
-        hasErrors = true;
-    }
-
-    // Check Field A2_10
-    if (!inputValues[8]?.trim()) {
-        newErrorMessages.field_9 = t(errorMessageKeys.field_9);
-        hasErrors = true;
+     // Check all relevant fields based on their defined index
+    for (let i = 5; i < fields.length; i++) {
+        if (!inputValues[i]?.trim()) {
+            newErrorMessages[`field_${i + 1}`] = t(errorMessageKeys[`field_${i + 1}`]);
+            hasErrors = true;
+        }
     }
 
     setErrorMessages(newErrorMessages);
@@ -143,6 +164,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
               handleInputChange(index, value); // Check for unsaved changes
             }}
             value={inputValues[index]} // Controlled input
+            error={!!errorMessages[`field_${index + 1}`]} // Pass the error state
             ref={inputRefs.current[index]}
           />
         )  : type === 'date' ? ( // New date input type
@@ -151,13 +173,13 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
           value={inputValues[index]} // Controlled input
           // onChange={(e) => handleInputChange(index, e.target.value)}
           ref={inputRefs.current[index]}
-          className="grow h-[38px] w-[250px] bg-white border border-solid text-gray-500 border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+          className={`grow h-[38px] w-[250px] bg-white border border-solid ${errorMessages[`field_${index + 1}`] ? 'border-[#c1121f] border-3 ring-3 ring-red-300' : 'border-[#7e7a7a]'} text-gray-500 border-[#7e7a7a] px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300`}
           placeholder={placeholder}
           readOnly={readOnly}
           onDoubleClick={() => {
             const todayJalaali = moment().format('jYYYY-jMM-jDD'); // Get today's date in Jalaali format
             inputRefs.current[index].current.value = todayJalaali; // Set the value to today'sdate
-            handleInputChange(index, e.target.value);
+            handleInputChange(index, todayJalaali);
           }}
         />
       ) : (
@@ -184,7 +206,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         )}
         
         {index === 0 && (
-          <button className='mr-3 p-3 rounded-full bg-gray-500 cursor-pointer hover:bg-gray-400'>
+          <button className='m-3 p-3 rounded-full bg-gray-500 cursor-pointer hover:bg-gray-400'>
             <img src={search_logo_icon} className='w-7' />
           </button>
         )}
