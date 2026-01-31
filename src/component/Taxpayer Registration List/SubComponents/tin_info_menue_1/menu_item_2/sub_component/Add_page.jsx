@@ -6,7 +6,7 @@ const Add_page = ({ textDirection1, t, setUnsavedChanges, addPageCheckboxStates,
   
   const inputRefs = useRef(Array(11).fill().map(() => React.createRef()));
 
-  const fields = [
+  const fieldsecond = [
     { label: t('A3_1'), placeholder: t('A3_1'), type: 'number' },
     { label: t('A3_2'), placeholder: t('A3_2'), type: 'textAndNumber' },
     { label: t('A3_3'), placeholder: t('A3_3'), type: 'textAndNumber' },
@@ -48,8 +48,8 @@ const handleCheckboxChange = (index) => {
   localStorage.setItem('addPageCheckboxStates', JSON.stringify(newStates));
 };
 
-  const renderInputFields = () => (
-    fields.map(({ label, placeholder, type, options }, index) => (
+  const renderInputFieldsecond = () => (
+    fieldsecond.map(({ label, placeholder, type, options }, index) => (
       <div key={index} className="flex flex-col md:flex-row items-center mb-4  w-[420px]  ">
         <label className="font-medium text-[13px] text-black p-2 items-center text-right sm:text-left w-[250px] md:w-[170px]">{label}:</label>
         {type === 'combo' ? (
@@ -137,7 +137,7 @@ const handleCheckboxChange = (index) => {
 
   return (
     <div className="border border-gray-400 overflow-y-auto h-100 bg-[#c2c2c2] flex flex-wrap justify-between items-center p-4" dir={textDirection1}>
-      {renderInputFields()}
+      {renderInputFieldsecond()}
     </div>
   );
 }
