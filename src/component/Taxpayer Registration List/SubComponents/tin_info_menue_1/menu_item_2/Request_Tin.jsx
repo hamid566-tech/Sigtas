@@ -26,6 +26,10 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
   const location = useLocation();
   const initialButton = localStorage.getItem('selectedButton') || t('A2_20');
   const [selectedButton, setSelectedButton] =  useState(initialButton);
+  const ChildRef = useRef();
+  
+        const [hasErrorsecond,setHasErrorsecond] = useState(false);
+        
   
  
 
@@ -136,11 +140,13 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     setErrorMessages(newErrorMessages);
 
     // Proceed if no errors
-    if (!hasErrors) {
+    if (!hasErrors && !hasErrorsecond) {
         // navigate('/menu/content');
         console.log("hello")
 
     }
+
+    ChildRef.current.handleButtonClick_save_second();
 };
 
   const renderInputFields = () => (
@@ -149,7 +155,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         {errorMessages[`field_${index + 1}`] && (
             <div className={`text-[#c1121f] text-md font-bold mb-1 ${textDirection === 'rtl' ? 'text-right' : 'text-left'}`}>{errorMessages[`field_${index + 1}`]}</div>
           )}
-      <div key={index} className="flex flex-col md:flex-row items-center mb-4">
+       <div key={index} className="flex flex-col md:flex-row items-center mb-4">
         <label className="font-medium text-[13px] text-black p-2 items-center text-right sm:text-left w-[250px] md:w-[170px]">{label}:</label>
         
         {type === 'combo' ? (
@@ -231,12 +237,10 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
 
   
   const handleInputChange = (index, value) => {
-    // const hasInput = inputRefs.current.some(ref => ref.current.value.trim() !== "");
-    // setUnsavedChanges(hasInput);
-     const updatedValues = [...inputValues];
+    
+    const updatedValues = [...inputValues];
     updatedValues[index] = value;
     setInputValues(updatedValues);
-    // Check for unsaved changes
     setUnsavedChanges(updatedValues.some(val => val.trim() !== ''));
   };
 
@@ -336,7 +340,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         ))}
       </div>
       <Routes>
-        <Route path="/" element={<Add_page textDirection1={textDirection1} t={t} setUnsavedChanges={setUnsavedChanges} addPageCheckboxStates={addPageCheckboxStates} setAddPageCheckboxStates={setAddPageCheckboxStates} />} />
+        <Route path="/" element={<Add_page textDirection={textDirection} textDirection1={textDirection1} t={t} setUnsavedChanges={setUnsavedChanges} addPageCheckboxStates={addPageCheckboxStates} setAddPageCheckboxStates={setAddPageCheckboxStates} setHasErrorsecond={setHasErrorsecond} ref={ChildRef} />} />
         <Route path="attachment" element={<Attachments textDirection1={textDirection1} t={t} checkboxStates={checkboxStates} setCheckboxStates={setCheckboxStates}/>} />
         <Route path="record_history" element={<Record_history textDirection1={textDirection1} t={t} />} />
       </Routes>
