@@ -86,8 +86,8 @@ const Add_page = ({ textDirection, textDirection1, t, setUnsavedChanges, addPage
         let hasErrors = false;
 
         // Check all relevant fields based on their defined index
-        for (let i = 0; i <fieldsecond.length; i++) {
-            if (!inputValues[i]?.trim()) {
+        for (let i = 0; i <fieldsecond.length-1; i++) {
+            if (i !== 7 && !inputValues[i]?.trim()) {
                 newErrorMessages[`field_2_${i + 1}`] = t(errorMessageKeys[`field_2_${i + 1}`]);
                 hasErrors = true;
             }

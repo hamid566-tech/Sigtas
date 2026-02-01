@@ -249,8 +249,8 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     setAddPageCheckboxStates([false, false, false, false, false, false, false, false, false, false]);
     localStorage.setItem('addPageCheckboxStates', JSON.stringify([false, false, false, false, false, false, false, false, false, false]));
 
-    // Reset any unsaved changes state
-    setUnsavedChanges(false);
+     
+    
   };
 
   
@@ -375,7 +375,7 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
       </div>
     </section>
       <SaveDialogbox 
-        textDirection={textDirection}
+        textDirection1={textDirection1}
         t={t}
         isOpen={showSaveDialog}
         onClose={()=>setShowSaveDialog(false)}

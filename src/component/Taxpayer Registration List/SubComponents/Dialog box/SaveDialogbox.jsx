@@ -11,9 +11,9 @@ const SaveDialogbox = ({ textDirection1, t, isOpen, onClose, onDiscard, onNaviga
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }} // 30% opacity
       dir={textDirection1}
     >
-      <div className="bg-[#10110e] rounded-[20px] text-white p-4 shadow-lg w-1/3" >
+      <div className="bg-[#90dbf4] rounded-[20px] text-black p-4 shadow-lg w-1/3 " >
         <div >
-        <p className='p-3'>{t('Z1_1')}</p>
+        <p className='p-3'>{t('Z1_1_1')}</p>
         <hr className='m-2' />
         </div>
         <div className="flex justify-around mt-4" dir={textDirection1}>
