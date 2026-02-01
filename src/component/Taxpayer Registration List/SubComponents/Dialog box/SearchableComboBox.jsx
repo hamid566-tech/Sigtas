@@ -3,7 +3,7 @@ import down_icon from '../../../../assets/down_icon.png';
 
 const SearchableComboBox = ({ textDirection1, options, placeholder, onChange, value, error, ref }) => {
 
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(value || '');
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef();
 
@@ -23,6 +23,11 @@ const SearchableComboBox = ({ textDirection1, options, placeholder, onChange, va
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+   // Update the searchTerm state whenever the input value changes
+  useEffect(() => {
+    setSearchTerm(value); // Update search term when value prop changes
+  }, [value]);
 
   return (
     <div className="relative" ref={dropdownRef} dir={textDirection1} >

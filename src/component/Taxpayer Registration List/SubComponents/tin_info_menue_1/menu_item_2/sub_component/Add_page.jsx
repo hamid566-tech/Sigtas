@@ -6,7 +6,8 @@ const Add_page = ({ textDirection, textDirection1, t, setUnsavedChanges, addPage
   
 
   useImperativeHandle(ref , () => ({
-    handleButtonClick_save_second
+    handleButtonClick_save_second,
+    handleResetFields
   }));
 
   const inputRefs = useRef(Array(11).fill().map(() => React.createRef()));
@@ -85,7 +86,7 @@ const Add_page = ({ textDirection, textDirection1, t, setUnsavedChanges, addPage
         let hasErrors = false;
 
         // Check all relevant fields based on their defined index
-        for (let i = 0; i <9; i++) {
+        for (let i = 0; i <fieldsecond.length; i++) {
             if (!inputValues[i]?.trim()) {
                 newErrorMessages[`field_2_${i + 1}`] = t(errorMessageKeys[`field_2_${i + 1}`]);
                 hasErrors = true;
@@ -104,6 +105,8 @@ const handleCheckboxChange = (index) => {
   setAddPageCheckboxStates(newStates);
   localStorage.setItem('addPageCheckboxStates', JSON.stringify(newStates));
 };
+
+
 
   const renderInputFieldsecond = () => (
     fieldsecond.map(({ label, placeholder, type, options }, index) => (
@@ -139,6 +142,7 @@ const handleCheckboxChange = (index) => {
             ) : (
               <input
                 type={type === 'numberWithDash' ? 'text' : 'text'}
+                value={inputValues[index]} // Controlled input
                 ref={inputRefs.current[index]}
                 className={`flex-grow h-[38px] w-[250px] bg-white border border-solid ${errorMessages[`field_2_${index + 1}`] ? 'border-[#c1121f] border-3 ring-3 ring-red-300' : 'border-[#7e7a7a]'} px-2 pr-5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300`}
                 placeholder={placeholder}
@@ -168,7 +172,11 @@ const handleCheckboxChange = (index) => {
     setUnsavedChanges(updatedValues.some(val => val.trim() !== ''));
   };
 
-  
+   const handleResetFields = () => {
+        setInputValues(Array(fieldsecond.length).fill('')); // Reset input values
+        // setAddPageCheckboxStates([false, false, false, false]); // Reset checkboxes
+        // localStorage.setItem('addPageCheckboxStates', JSON.stringify([false, false, false, false]));
+    };
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {

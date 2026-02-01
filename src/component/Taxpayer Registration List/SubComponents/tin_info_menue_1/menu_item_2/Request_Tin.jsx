@@ -8,27 +8,28 @@ import SearchableComboBox from '../../Dialog box/SearchableComboBox';
 import Modal from '../../Dialog box/Modal';
 import moment from 'moment-jalaali';
 import search_logo_icon from '../../../../../assets/search_logo_icon.png'
+import SaveDialogbox from '../../Dialog box/SaveDialogbox';
 
 const Request_Tin = ({textDirection, textDirection1, t }) => {
 
-  const inputRefs = useRef(Array(18).fill().map(() => React.createRef()));
-  const [unsavedChanges, setUnsavedChanges] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
-  const [checkboxStates, setCheckboxStates] = useState(() => {
-    const savedCheckboxStates = localStorage.getItem('checkboxStates');
+        const inputRefs = useRef(Array(18).fill().map(() => React.createRef()));
+        const [unsavedChanges, setUnsavedChanges] = useState(false);
+        const [checkboxStates, setCheckboxStates] = useState(() => {
+        const savedCheckboxStates = localStorage.getItem('checkboxStates');
     return savedCheckboxStates ? JSON.parse(savedCheckboxStates) : [false, false, false, false];
   });
-  const [addPageCheckboxStates, setAddPageCheckboxStates] = useState(() => {
-    const savedaddPageCheckboxStates = localStorage.getItem('addPageCheckboxStates');
+        const [addPageCheckboxStates, setAddPageCheckboxStates] = useState(() => {
+        const savedaddPageCheckboxStates = localStorage.getItem('addPageCheckboxStates');
     return savedaddPageCheckboxStates ? JSON.parse(savedaddPageCheckboxStates) :[false, false, false, false, false, false, false, false, false, false];
   }); // Adjust based on the number of checkboxes
-  const navigate = useNavigate();
-  const location = useLocation();
-  const initialButton = localStorage.getItem('selectedButton') || t('A2_20');
-  const [selectedButton, setSelectedButton] =  useState(initialButton);
-  const ChildRef = useRef();
-  
+        const navigate = useNavigate();
+        const location = useLocation();
+        const initialButton = localStorage.getItem('selectedButton') || t('A2_20');
+        const [selectedButton, setSelectedButton] =  useState(initialButton);
+        const ChildRef = useRef();
         const [hasErrorsecond,setHasErrorsecond] = useState(false);
+        const [showDialog, setShowDialog] = useState(false);
+        const [showSaveDialog, setShowSaveDialog] = useState(false);
         
   
  
@@ -142,7 +143,8 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     // Proceed if no errors
     if (!hasErrors && !hasErrorsecond) {
         // navigate('/menu/content');
-        console.log("hello")
+        console.log("hello");
+        setShowSaveDialog(true);
 
     }
 
@@ -233,6 +235,22 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
 
     setAddPageCheckboxStates([false, false, false, false, false, false, false, false, false, false]);
     localStorage.setItem('addPageCheckboxStates', JSON.stringify([false, false, false, false, false, false, false, false, false, false]));
+  };
+
+  const handleSaveDialogbox = () => {
+    setShowSaveDialog(false);
+
+    setInputValues(Array(fields.length).fill(''));
+    ChildRef.current.handleResetFields();
+
+    setCheckboxStates([false, false, false, false]);
+    localStorage.setItem('checkboxStates', JSON.stringify([false, false, false, false]));
+
+    setAddPageCheckboxStates([false, false, false, false, false, false, false, false, false, false]);
+    localStorage.setItem('addPageCheckboxStates', JSON.stringify([false, false, false, false, false, false, false, false, false, false]));
+
+    // Reset any unsaved changes state
+    setUnsavedChanges(false);
   };
 
   
@@ -356,6 +374,14 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         </button>
       </div>
     </section>
+      <SaveDialogbox 
+        textDirection={textDirection}
+        t={t}
+        isOpen={showSaveDialog}
+        onClose={()=>setShowSaveDialog(false)}
+        onDiscard={()=>setShowSaveDialog(false)}
+        onNavigate={handleSaveDialogbox}
+      />
      <Modal
         textDirection1={textDirection1}
         t={t}
