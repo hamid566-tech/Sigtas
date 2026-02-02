@@ -87,10 +87,16 @@ const Add_page = ({ textDirection, textDirection1, t, setUnsavedChanges, addPage
 
         // Check all relevant fields based on their defined index
         for (let i = 0; i <fieldsecond.length-1; i++) {
-            if (i !== 0 && i !== 1 && i !== 7 && !inputValues[i]?.trim()) {
+            if (i !== 0 && i !== 1 && i !== 6 && i !== 7 && !inputValues[i]?.trim()) {
                 newErrorMessages[`field_2_${i + 1}`] = t(errorMessageKeys[`field_2_${i + 1}`]);
                 hasErrors = true;
             }
+
+            if (fieldsecond[i].type === 'combo' && !fieldsecond[i].options.includes(inputValues[i])) {
+                newErrorMessages[`field_2_${i + 1}`] = t('Z1_9'); // Set error message for invalid option
+                hasErrors = true;
+            }
+
         }
 
         setErrorMessages(newErrorMessages);
@@ -168,6 +174,25 @@ const handleCheckboxChange = (index) => {
     
     const updatedValues = [...inputValues];
     updatedValues[index] = value;
+
+    // Check if the field is of type 'combo'
+    if (fieldsecond[index].type === 'combo') {
+        const isOptionValid = fieldsecond[index].options.includes(value);
+        if (!isOptionValid) {
+            setErrorMessages(prev => ({
+                ...prev,
+                [`field_2_${index + 1}`]: t('Z1_9'), // Error message for invalid option
+            }));
+        } 
+        // else {
+        //     setErrorMessages(prev => ({
+        //         ...prev,
+        //         [`field_2_${index + 1}`]: '', // Clear error if valid
+        //     }));
+        // }
+    }
+
+
     setInputValues(updatedValues);
     setUnsavedChanges(updatedValues.some(val => val.trim() !== ''));
   };
