@@ -136,6 +136,10 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
             newErrorMessages[`field_${i + 1}`] = t(errorMessageKeys[`field_${i + 1}`]);
             hasErrors = true;
         }
+        if (fields[i].type === 'combo' && !fields[i].options.includes(inputValues[i])) {
+            newErrorMessages[`field_${i + 1}`] = t('Z1_9'); // Set your error message
+            hasErrors = true;
+        }
     }
 
     setErrorMessages(newErrorMessages);
@@ -258,8 +262,37 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
     
     const updatedValues = [...inputValues];
     updatedValues[index] = value;
+
+    // Only check validity if the field is of type 'combo'
+    if (fields[index].type === 'combo') {
+        const isOptionValid = fields[index].options.includes(value);
+
+        // Show an error message if the value is not valid
+        if (!isOptionValid) {
+            setErrorMessages(prev => ({
+                ...prev,
+                [`field_${index + 1}`]: t('Z1_9'), // Set your error message here
+            }));
+        } 
+        // else {
+        //     // Clear the error message if valid
+        //     setErrorMessages(prev => ({
+        //         ...prev,
+        //         [`field_${index + 1}`]: '',
+        //     }));
+        // }
+    } 
+    // else {
+    //     // Clear any error message related to non-combo fields
+    //     setErrorMessages(prev => ({
+    //         ...prev,
+    //         [`field_${index + 1}`]: '',
+    //     }));
+    // }
+
     setInputValues(updatedValues);
     setUnsavedChanges(updatedValues.some(val => val.trim() !== ''));
+
   };
 
   const handleButtonClick_menu = (buttonType) => {
