@@ -143,7 +143,8 @@
   "Z1_5_1":"Find TIN",
   "Z1_5_2":"Find Request Number",
   "Z1_6":"Exit",
-  "Z1_7":"Request for Approval by the System",
+  "Z1_7_1":"Request for Approval by the System",
+  "Z1_7_2":"Update",
   "Z1_8":"Register",
   "Z1_9":"This line is required. *"
   

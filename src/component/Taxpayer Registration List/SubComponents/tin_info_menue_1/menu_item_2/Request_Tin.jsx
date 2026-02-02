@@ -396,13 +396,16 @@ const Request_Tin = ({textDirection, textDirection1, t }) => {
         <Route path="record_history" element={<Record_history textDirection1={textDirection1} t={t} />} />
       </Routes>
       <div className="border border-gray-400 rounded-bl-[37px] rounded-br-[37px] bg-[#c2c2c2] mt-4 flex flex-wrap flex-col md:flex-row gap-4 justify-center items-center p-4 md:p-6" dir={textDirection1}>
-        <button className="bg-[#548c2f] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer" onClick={handleButtonClick_save} >
+        <button className="bg-[#548c2f] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base  hover:brightness-130 cursor-pointer" onClick={handleButtonClick_save} >
             {t('Z1_8') }
         </button>
-        <button className="bg-blue-500 text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer">
-             {t('Z1_7')}   
+        <button className="bg-[#2d6a4f] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base  hover:brightness-130 cursor-pointer">
+             {t('Z1_7_1')}   
         </button>
-        <button className="bg-[#d62828] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base opacity-70 hover:opacity-100 cursor-pointer" onClick={handleButtonClick}>
+        <button className="bg-[#1d8a99] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base  hover:brightness-130 cursor-pointer">
+             {t('Z1_7_2')}   
+        </button>
+        <button className="bg-[#d62828] text-white p-2 min-w-[70px] sm:min-w-[120px] max-h-[50px] rounded-full mb-2 border-4 border-gray-700/2 shadow-[0_5px_10px_0_rgba(25,142,142,0.56)] font-semibold text-sm md:text-base hover:brightness-130 cursor-pointer" onClick={handleButtonClick}>
             {t('Z1_6')}
         </button>
       </div>
